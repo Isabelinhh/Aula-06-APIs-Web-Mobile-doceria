@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your's Dicinhos</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        barlow: ['Barlow', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#ca3c3f',
+                        dark: '#222222',
+                        muted: '#999999',
+                        footer: '333333',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+</head>
+
+<body class="bg-gray-100">
+
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between">
+                <!-- LOGO -->
+                <div class="flex space-x-7">
+                    <div>
+                        <a href="#" class="flex items-center py-4 px-2">
+                            <span class="font-semibold text-pink-500
+                          
+                text-lg">YOUR'S DOCINHOS</span>
+                        </a>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-1">
+                        <a href="#home" class="py-4 px-2 text-pink-500border-b-4 border-pink-500 font-semibold">HOME</a>
+                        <a href="#cardapio" class="py-4 px-2 text-gray-500 font-semibold hover:text-pink-400 transition duration-300">Cardápio</a>
+                    </div>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button class="outline-none mobile-menu-button" id="btn-mobile">
+                        <svg class="w-6 h-6 text-black-500 hover:text-red-500" x-show="!showMenu" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+       
+        <!-- segundo formato -->
+        <div class="hidden mobile-menu md:hidden" id="menu-mobile">
+            <ul>
+                <li><a href="#home" class="block text-sm px-2 py-4 text-white bg-pink-300 font-semibold">Home</a></li>
+                <li><a href="#cardapio" class="block text-sm px-2 py-4 hover:bg-red-300 transition duration-300">Cardápio</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <script>
+        //seleciona o botão menu
+        const btn = document.getElementById('btn-mobile');
+        const menu = document.getElementById('menu-mobile');
+
+        //adiciona um evento de clique ao botão
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        barlow: ['Barlow', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#F06292'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="font-barlow text-gray-800">
+
+<header class="flex items-center justify-between px-6 mt-[5vh]">
+
+    <figure>
+        <img src="./ascets/logo2.png"
+             alt="Logo"
+             class="w-[170vw] max-w-[380px] ">
+    </figure>
+
+</header>
+
+<!-- Menu Mobile -->
+<div id="mobileMenu"
+     class="fixed top-0 right-[-100%] w-[70%] h-full bg-black shadow-lg transition-all duration-300 p-8 md:hidden z-50">
+
+    <button id="closeBtn" class="text-2xl mb-6">
+        ✕
+    </button>
+
+    <ul class="flex flex-col gap-6 text-lg">
+          <li><a href="#home" class="hover:text-primary transition">Home</a></li>
+            <li><a href="#cardápio" class="hover:text-primary transition">Cardápio</a></li>
+    </ul>
+
+</div>
+
+<section class="text-center p-8">
+
+    <div class="md:flex md:items-center md:justify-center md:gap-10">
+
+        <article class="md:w-[45%]">
+
+            <h1 class="text-2xl md:text-4xl font-semibold">
+                O verdadeiro sabor de docinhos caseiros!
+            </h1>
+
+            <a href="#cardapio"
+               class="inline-block mt-4 px-8 py-4 border border-gray-800 rounded-xl text-lg min-h-[48px] hover:bg-primary hover:text-black transition">
+                VEJA O CARDÁPIO
+            </a>
+
+        </article>
+
+        <figure class="md:w-[45%] mt-6 md:mt-0">
+            <img src="./ascets/docess.png"
+                 alt="Prato japonês"
+                 class="w-[90%] mx-auto">
+        </figure>
+
+    </div>
+
+</section>
+
+<!--  CARDÁPIO -->
+<section id="cardapio"
+         class="max-w-[90vw] mx-auto mt-[5vh] p-8">
+
+    <h2 class="text-3xl font-bold text-center mb-8">
+        Cardápio
+    </h2>
+
+    <!-- inicio botoes de menu - categoria -->
+    <nav id="nav-categorias" class="overflow-x-auto whitespace-nowrap snap-x flex gap-2 mt-6 pb-1">
+        <button data-cat="bolos caseiros" class="snap-start px-4 py-1 rounded-full bg-primary text-white font-bold text-sm transition-transform duration-150 cursor-pointer flex-shrink-0 btn-cat">
+            Bolos Caseiros
+        </button>
+        <button data-cat="bebidas" class="snap-start px-4 py-1 rounded-full bg-primary text-white font-bold text-sm transition-transform duration-150 cursor-pointer flex-shrink-0 btn-cat">
+            Bebidas
+        </button>
+        <button data-cat="sobremesas" class="snap-start px-4 py-1 rounded-full bg-primary text-white font-bold text-sm transition-transform duration-150 cursor-pointer flex-shrink-0 btn-cat">
+            Sobremesas
+        </button>
+         <button data-cat="docinhos" class="snap-start px-4 py-1 rounded-full bg-primary text-white font-bold text-sm transition-transform duration-150 cursor-pointer flex-shrink-0 btn-cat">
+            Docinhos
+        </button>
+    </nav>
+
+    <!-- MUDANÇA PARA GRID -->
+            <!-- SUSHI E SASHIMI - separar por categoria -->
+            <div id="cat-Bolos Caseiros" class="categoria-conteudo">
+                <div class="text-left text-dark font-extrabold text-[22px] mt-8 mb-4">Bolos Caseiros</div>
+                <!-- Bolos Caseiros -->
+                <div class="grid-cols-2 gap-4">
+                    <div
+                        class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
+                        <div class="absolute inset-0 z-0 cursor-pointer"
+                            onclick="abrirModalDetalhes('Bolo de Cenoura', 16.00, 'Bolo de Cenoura com cobertura de chocolate','./assets/img/bolodecenoura.avif', 's_1')">
+
+                        </div>
+                        <!-- Botão Favorito -->
+                        <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            </svg>
+                        </button>
+
+                        <!-- nome e preço -->
+                        <img src="./ascets/bolodecenoura.avif" alt="Bolo de cenoura"
+                            class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
+                        <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
+                            <h4 class="font-bold text-sark text-sm leading-tight">Bolo de Cenoura</h4>
+                            <p class="text-primary font-black text-lg leading-none mt-1">R$16,00</p>
+                        </div>
+
+                        <!-- botão adicionar -->
+                        <button onclick="adicionarItem('s_1', 'Bolo de Cenoura', 16.00)"
+                            class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!--Bolo de chocolate-->
+            <div class="grid-cols-2 gap-4">
+                <div
+                    class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
+                    <div class="absolute inset-0 z-0 cursor-pointer"
+                        onclick="abrirModalDetalhes('Bolo de Chocolate', 17.00, 'Bolo de Chocolate com recheio de Chocolate','./assets/img/bolochocolate.jpg', 's_2')">
+
+                    </div>
+                    <!-- Botão Favorito -->
+                    <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                        </svg>
+                    </button>
+
+                    <!-- nome e preço -->
+                    <img src="./ascets/bolochocolate.jpg" alt="Bolo de Chocolate"
+                        class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
+                    <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
+                        <h4 class="font-bold text-sark text-sm leading-tight">Bolo de chocolate</h4>
+                        <p class="text-primary font-black text-lg leading-none mt-1">R$17,00</p>
+                    </div>
+
+                    <!-- botão adicionar -->
+                    <button onclick="adicionarItem('s_2', 'Bolo de Chocolate', 17.00)"
+                        class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
+                </div>
+
+
+            </div>
+            </div>
+
+            <!-- Bolo de Fubá c/ goiabada-->
+            <div class="grid-cols-2 gap-4">
+                <div
+                    class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
+                    <div class="absolute inset-0 z-0 cursor-pointer"
+                        onclick="abrirModalDetalhes('Bolo de Fubá com Goiabada', 20.00, 'Bolo de Fubá recheado com Goiabada','./assets/img/bolofuba', 's_3')">
+
+                    </div>
+                    <!-- Botão Favorito -->
+                    <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                        </svg>
+                    </button>
+
+                    <!-- nome e preço -->
+                    <img src="./ascets/bolofuba.jpg" alt="Bolo de Fubá com Goiabada"
+                        class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
+                    <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
+                        <h4 class="font-bold text-sark text-sm leading-tight">Bolo de Fubá com Goiabada</h4>
+                        <p class="text-primary font-black text-lg leading-none mt-1">R$ 20,00</p>
+                    </div>
+
+                    <!-- botão adicionar -->
+                    <button onclick="adicionarItem('s_3', 'Bolo de Fubá com Goiabada', 20.00)"
+                        class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
+                </div>
+
+            </div>
+            </div>
+
+            </div>
+
+    <!-- fim do botao menu - categoria -->
+ <!-- MUDANÇA PARA GRID -->
+    <!-- - separar por categoria-->
+     <!-- <div id="cat-bolos caseiros" class="categoria-conteudo">
+        <h3 class="text-primary text-xl mt-6 font-semibold">
+        Bolos Caseiros
+    </h3>
+
+    <div class="mt-4 space-y-4"> -->
+
+        <!-- <article>
+            <div class="flex justify-between">
+                <h4 class="font-bold text-lg">Bolo de Chocolate</h4>
+                <span class="text-primary">R$ 17,00</span>
+            </div>
+            <p class="text-sm text-gray-500">
+               Bolo de chocolate caseiro com receheio de Chocolate
+            </p>
+        </article>
+
+        <article>
+            <div class="flex justify-between">
+                <h4 class="font-bold text-lg">Bolo de Cenoura</h4>
+                <span class="text-primary">R$ 15,00</span>
+            </div>
+            <p class="text-sm text-gray-500">
+              Bolo de cenoura caseiro com recheiio de chocolate
+            </p>
+        </article>
+
+        <article>
+            <div class="flex justify-between">
+                <h4 class="font-bold text-lg">Bolo de Milho</h4>
+                <span class="text-primary">R$ 20,00</span>
+            </div>
+            <p class="text-sm text-gray-500">
+               Bolo de Milho caseiro cremoso 
+            </p>
+        </article>
+
+        <article>
+            <div class="flex justify-between">
+                <h4 class="font-bold text-lg">Bolo de Fubá</h4>
+                <span class="text-primary">R$ 15,00</span>
+            </div>
+            <p class="text-sm text-gray-500">
+              Bolo de Fubá caseiro
+            </p>
+        </article>
+
+    </div>
+     </div> -->
+    
+
+    <!-- Bolos de Aniverssário
+     <div id="cat-bebidas" class="categoria-conteudo">
+        <h3 class="text-primary text-xl mt-10 font-semibold">
+        Bolos de Aniverssário
+    </h3>
+
+    <div class="mt-4 space-y-4">
+
+        <article>
+            <div class="flex justify-between">
+                <h4 class="font-bold text-lg">Água</h4>
+                <span class="text-primary">R$ 6,00</span>
+            </div>
+            <p class="text-sm text-gray-500">
+               300ml 
+            </p>
+        </article>
+
+        <article>
+            <div class="flex justify-between">
+                <h4 class="font-bold text-lg">Suco Natural Laranja</h4>
+                <span class="text-primary">R$ 17,00</span>
+            </div>
+            <p class="text-sm text-gray-500">
+                Suco de Laranja Natural - 300ml
+            </p>
+        </article>
+
+
+        <article>
+            <div class="flex justify-between">
+                <h4 class="font-bold text-lg">Refrigerante</h4>
+                <span class="text-primary">R$ 8,00</span>
+            </div>
+            <p class="text-sm text-gray-500">
+                Lata 350ml
+            </p>
+        </article>
+
+    </div>
+     </div>
+     
+            // BEBIDAS -->
+            <div id="cat-bebidas" class="categoria-conteudo">
+                <div class="text-left text-dark font-extrabold text-[22px] mt-8 mb-4">Bebidas</div>
+                <div class="grid-cols-2 gap-4">
+                    <div
+                        class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
+                        <div class="absolute inset-0 z-0 cursor-pointer"
+                            onclick="abrirModalDetalhes('Limonada', 20.00, ' Limonada - 300ml','./assets/img/limonada.webp', 's_5')">
+
+                        </div>
+                        <!-- Botão Favorito -->
+                        <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            </svg>
+                        </button>
+
+                        <!-- nome e preço -->
+                        <img src="./assets/img/limonada.webp" alt="Limonada"
+                            class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
+                        <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
+                            <h4 class="font-bold text-sark text-sm leading-tight">Limonada</h4>
+                            <p class="text-primary font-black text-lg leading-none mt-1">R$20,00</p>
+                        </div>
+
+                        <!-- botão adicionar -->
+                        <button onclick="adicionarItem('s_5', 'Limonada', 20.00)"
+                            class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Suco Natural -->
+            <div class="grid-cols-2 gap-4">
+                <div
+                    class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
+                    <div class="absolute inset-0 z-0 cursor-pointer"
+                        onclick="abrirModalDetalhes('Suco Natural Laranja', 17.00, ' Suco de Laranja Natural - 300ml','./assets/img/suco.webp', 's_6')">
+
+                    </div>
+                    <!-- Botão Favorito -->
+                    <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                        </svg>
+                    </button>
+
+                    <!-- nome e preço -->
+                    <img src="./assets/img/suco.webp" alt="Suco de Laranja"
+                        class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
+                    <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
+                        <h4 class="font-bold text-sark text-sm leading-tight">Suco Natural Laranja</h4>
+                        <p class="text-primary font-black text-lg leading-none mt-1">R$17,00</p>
+                    </div>
+
+                    <!-- botão adicionar -->
+                    <button onclick="adicionarItem('s_6', 'Suco Natural Laranja', 17.00)"
+                        class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
+                </div>
+
+            </div>
+            </div>
+
+            <!-- Refrigerante -->
+            <div class="grid-cols-2 gap-4">
+                <div
+                    class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
+                    <div class="absolute inset-0 z-0 cursor-pointer"
+                        onclick="abrirModalDetalhes('Refrigerante', 8.00, ' Lata 350ml','./assets/img/refri.webp', 's_7')">
+
+                    </div>
+                    <!-- Botão Favorito -->
+                    <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                        </svg>
+                    </button>
+
+                    <!-- nome e preço -->
+                    <img src="./assets/img/refri.webp" alt="Refrigerante"
+                        class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
+                    <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
+                        <h4 class="font-bold text-sark text-sm leading-tight">Refrigerante</h4>
+                        <p class="text-primary font-black text-lg leading-none mt-1">R$8,00</p>
+                    </div>
+
+                    <!-- botão adicionar -->
+                    <button onclick="adicionarItem('s_7', 'Refrigerante', 8.00)"
+                        class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
+                </div>
+
+
+            </div>
+            </div>
+
+            </div>
+
+    
+
+    <div id="cat-sobremesas" class="categoria-conteudo">
+        <h3 class="text-primary text-xl mt-6 font-semibold">
+        Sobremesas
+    </h3>
+
+    <div class="mt-4 space-y-4">
+
+        <article>
+            <div class="flex justify-between">
+                <h4 class="font-bold text-lg">Taça de Sorvete</h4>
+                <span class="text-primary">R$ 19,90</span>
+            </div>
+            <p class="text-sm text-gray-500">
+                Sorvete - 3 bolas (escolha os sabores)
+            </p>
+        </article>
+
+        <article>
+            <div class="flex justify-between">
+                <h4 class="font-bold text-lg">Pudim</h4>
+                <span class="text-primary">R$ 17,90</span>
+            </div>
+            <p class="text-sm text-gray-500">
+                Pudim de leite condensado
+            </p>
+        </article>
+
+        <article>
+            <div class="flex justify-between">
+                <h4 class="font-bold text-lg">Mousse</h4>
+                <span class="text-primary">R$ 17,90</span>
+            </div>
+            <p class="text-sm text-gray-500">
+                Escolha o sabor: Chocolate, Maracuja, Morango e Coco.
+            </p>
+        </article>
+    </div>
+    </div>
+
+      <!-- SOBREMESAS -->
+            <div id="cat-sobremesas" class="categoria-conteudo">
+                <div class="text-left text-dark font-extrabold text-[22px] mt-8 mb-4">Sobremesas</div>
+                <!-- sorvete -->
+                <div class="grid-cols-2 gap-4">
+                    <div
+                        class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
+                        <div class="absolute inset-0 z-0 cursor-pointer"
+                            onclick="abrirModalDetalhes('Taça de Sorvete', 19.90, ' Sorvete - 3 bolas (escolha os sabores)','./assets/img/sorvete.webp', 's_8')">
+
+                        </div>
+                        <!-- Botão Favorito -->
+                        <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            </svg>
+                        </button>
+
+                        <!-- nome e preço -->
+                        <img src="./assets/img/sorvete.webp" alt="Taça de Sorvete"
+                            class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
+                        <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
+                            <h4 class="font-bold text-sark text-sm leading-tight">Taça de Sorvete</h4>
+                            <p class="text-primary font-black text-lg leading-none mt-1">R$19,90</p>
+                        </div>
+
+                        <!-- botão adicionar -->
+                        <button onclick="adicionarItem('s_8', 'Taça de Sorvete', 19.90)"
+                            class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- pudim -->
+            <div class="grid-cols-2 gap-4">
+                <div
+                    class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
+                    <div class="absolute inset-0 z-0 cursor-pointer"
+                        onclick="abrirModalDetalhes('Pudim', 17.90, 'Pudim de leite condensado','./assets/img/pudim.webp', 's_9')">
+
+                    </div>
+                    <!-- Botão Favorito -->
+                    <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                        </svg>
+                    </button>
+
+                    <!-- nome e preço -->
+                    <img src="./assets/img/pudim.webp" alt="Pudim"
+                        class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
+                    <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
+                        <h4 class="font-bold text-sark text-sm leading-tight">Pudim</h4>
+                        <p class="text-primary font-black text-lg leading-none mt-1">R$17,90</p>
+                    </div>
+
+                    <!-- botão adicionar -->
+                    <button onclick="adicionarItem('s_9', 'Pudim', 17.90)"
+                        class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
+                </div>
+
+            </div>
+
+            <!-- mousse -->
+            <div class="grid-cols-2 gap-4">
+                <div
+                    class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
+                    <div class="absolute inset-0 z-0 cursor-pointer"
+                        onclick="abrirModalDetalhes('Mousse', 17.90, 'Escolha o sabor: Chocolate, Maracuja, Morango e Coco.','./assets/img/mousse.webp', 's_10')">
+
+                    </div>
+                    <!-- Botão Favorito -->
+                    <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                        </svg>
+                    </button>
+
+                    <!-- nome e preço -->
+                    <img src="./assets/img/mousse.webp" alt="Mousse"
+                        class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
+                    <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
+                        <h4 class="font-bold text-sark text-sm leading-tight">Mousse</h4>
+                        <p class="text-primary font-black text-lg leading-none mt-1">R$17,90</p>
+                    </div>
+
+                    <!-- botão adicionar -->
+                    <button onclick="adicionarItem('s_10', 'Mousse', 17.90)"
+                        class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
+                </div>
+
+            </div>
+            </div>
+
+            </div>
+
+     
+    
+    
+</section>
+
+<footer class="bg-pink-800 text-white text-center p-12 mt-[5vh]">
+    <p>© 2026 Your's Docimhos - Todos os direitos reservados</p>
+
+    <p class="mb-2">Rua Prof. Toledo, Número 500 - Centro Sorocaba-Sp</p>
+    <p class="mb-2">(15) 99789-9876</p>
+    <p class="mb-2">Aberto todos os das das 14h ás 23h</p>
+
+</footer>
+
+
+<aside>
+    <a href="https://wa.me/5515987654321">
+        <img src="./ascets/whatsapp.png"
+             class="h-[5vh] fixed bottom-[2vh] right-[4vw]"
+             alt="WhatsApp">
+    </a>
+</aside>
+
+// script para botão categoria -->
+ <!-- separar cada categoria -->
+<script>
+    const botoes = document.querySelectorAll('.btn-cat');
+    const conteudos = document.querySelectorAll('.categoria-conteudo');
+
+    function mudarCategoria(cat){
+        //mostra apenas a categoria selecionadas
+        conteudos.forEach(div => {
+            div.id === 'cat-' + cat ? div.classList.remove('hidden') : div.classList.add('hidden')
+    });
+    //atualiza o estilo do botão ativo
+    botoes.forEach(btn => {
+        if(btn.dataset.cat === cat){
+            btn.classList.add('bg-primary', 'text-white');
+            btn.classList.remove('bg-[#ebebeb]', 'text-dark');
+        }else{
+            btn.classList.remove('bg-primary', 'text-white');
+            btn.classList.add('bg-[#ebebeb]', 'text-dark')
+        }
+    });
+    }
+
+    // //adiciona eventos a cada botão 
+    // botoes.forEach(btn => {
+    //     btn.addEventListener('touchstart', () => {
+    //         btn.classList.add('scale-95');
+            
+    //     });
+    //     btn.addEventListener('touchend', () => {
+    //         btn.classList('scale-95');
+    //     });
+    //     btn.addEventListener('click', () => {
+    //     mudarCategoria(btn.dataset.cat);
+    //     });
+    // });
+
+    //ativa scroll suave para links internos
+    let startX = 0;
+    let startY = 0;
+
+    //evento de cada botão 
+    botoes.forEach(btn => {
+        //touchstart é disparado assim que o dedo toca a tela 
+        btn.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+             //aplica class tailwind para efeito de clique
+             btn.classList.add('scale-95', 'opacity-80');
+        });
+        //touchend quando tira o dedo da tela 
+        btn.addEventListener('touchend', (e) => {
+            //remove efeito 
+            btn.classList.remove('scale-95', 'opacity-80');
+            //ultima posição do dedo antes de levantar
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changed.Touches[0].clientY;
+            //clacula distância percorrida oelo dedo em pixels
+            const deltaX = Math.abs(endX - startX);
+             const deltaY = Math.abs(endX - startY);
+             //logica matemática se moveu menos de 10px = clique intencional
+             if (deltaX < 10 && deltaY < 10) {
+                mudarCategoria(btn.dataset.cat);
+             }
+
+        });
+        //touchcancel se o celular aparecer uma lição ou notificação popup
+        btn.addEventListener('touchcancel', () => {
+            btn.classList.remove('scale-95', 'opacity-80');
+        });
+        //click para usuários dektop
+        btn.addEventListener('click', () => {
+            mudarCategoria(btn.dataset.cat);
+        })
+
+          //logica do carrinho, loclstorage e apis
+            //modal detalhes do produto
+
+            const modalDetalhes = document.getElementById('detalhes-modal');
+            const modalDetalhesContent = document.getElementById('detalhes-modal-content');
+
+            //abre o modal com informações do produto clicado
+            function abrirModalDetalhes(nome, preco, desc, img, id) {
+                if (navigator.vibrate) navigator.vibrate(40);
+
+                document.getElementById('detalhes-nome').innerText = nome;
+                document.getElementById('detalhes-preco').innerText = preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                document.getElementById('detalhes-desc').innerText = desc;
+                document.getElementById('detalhes-img').src = img;
+                document.getElementById('detalhes-btn-add').onclick = function () {
+                    adicionarItem(id, nome, preco);
+                    fecharModalDetalhes();
+                }
+                modalDetalhes.classList.remove('opacity-0', 'pointer-events-none');
+                setTimeout(() => {
+                    modalDetalhesContent.classList.remove('scale-95');
+                    modalDetalhesContent.classList.add('scale-100');
+                }, 10);
+            }
+
+            //fechar o modal detalhes do produto
+            function fecharModalDetalhes() {
+                modalDetalhesContent.classList.remove('scale-100');
+                modalDetalhesContent.classList.add('scale-95');
+                setTimeout(() => {
+                    modalDetalhes.classList.add('opacity-0', 'pointer-events-none');
+                }, 300);
+            }
+
+          //carrinho
+        //array para armazenar itens do carrinho
+        let carrinho = [];
+        //elementos do DOM
+        const carrinhoFooter = document.getElementById('carrinho-footer');
+        const carrinhoTotalSpan = document.getElementById ('carrinho-total');
+        //elementos do modal
+        const modal= document.getElementById('carrinho-modal');
+        const modalContent = document.getElementById('carrinho-modal-content');
+        const itensContainer = document.getElementById('carrinho-itens-container');
+        const modalTotalSpan = document.getElementById('modal-carrinho-total');
+        //verifica se o carrinho já tem itens salvos no localstorage
+        function inicializarCarrinho(){
+            const carrinhoSalvo = localStorage.getItem('haruy_carrinho');
+            if (carrinhoSalvo){
+                //se existe algo salvo converte de volta para array e atualiza o carrinho
+                carrinho = JSON.parse(carrinhoSalvo);
+                atualizarInterfaceCart();
+
+            }
+        }
+
+        //adicionar ao carrinho
+        function adicionarItem(id,nome,preco){
+            if (navigator.vibrate){
+                navigator.vibrate(200);
+            }
+            const index = carrinho.findIndex(item => item.id === id);
+
+            if (index !== -1){
+                carrinho[index].quantidade += 1;
+            }else{
+                carrinho.push({
+                    id: id,
+                    nome: nome,
+                    preco: preco,
+                    quantidade: 1
+                });
+            }
+            atualizarCarrinho();
+        }
+
+        //função modal abrir e fechar do carrinho
+        function abrirModalCarrinho (){
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                modalContent.classList.remove('translate-y-full', 'scale-95');
+            }, 10);
+        }
+        function fecharModalCarrinho(){
+            modalContent.classList.add('translate-y-full', 'scale-95');
+            setTimeout(() => {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+            }, 300);
+        }
+
+        //controles dentro do modal do carrinho (aumentar, diminuir,remover itens)
+        //controle de (+ / -) quantidade
+        function aumentarQuantidade(id){
+            const index = carrinho.findIndex(item => item.id === id);
+            if (index !== -1){
+                carrinho[index].quantidade += 1;
+                atualizarCarrinho();
+                //efeito de vibração para feedback tátil
+                if (navigator.vibrate) navigator.vibrate(50);
+            }
+        }
+        
+        function diminuirQuantidade(id){
+           const index = carrinho.findIndex(item => item.id === id);
+           if (index !== -1){
+            if (carrinho[index].quantidade>1){
+                carrinho [index].quantidade -= 1;
+            }else{
+                carrinho.splice(index, 1);
+                if (carrinho.length === 0){
+                    fecharModalCarrinho();
+                }
+            }
+            atualizarCarrinho();
+            if (navigator.vibrate) navigator.vibrate(50);
+           }
+        }
+
+        //persistencia do carrinho no localstorage e atualização da interface
+        function atualizarCarrinho() {
+            localStorage.setItem('haruy_carrinho', JSON.stringify(carrinho));
+            atualizarInterfaceCart();
+        }
+        function atualizarInterfaceCart(){
+            if(carrinho.length === 0){
+                carrinhoFooter.classList.add('translate-y-full');
+                return;
+            }
+            const total = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
+            const totalFormatado = total.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+            //Formata para a moeda Brasileira R$
+            carrinhoTotalSpan.innerText = totalFormatado;
+            modalTotalSpan.innerText = totalFormatado;
+            // Exibe a barra do carrinho (traz de volta pra tela)
+            carrinhoFooter.classList.remove('translate-y-full');
+            //Renderiza a lista de itens dentro do Modal
+            renderizarItensModal();
+        }
+
+       //função para renderizar os itens do carrinho dentro do modal
+        function renderizarItensModal(){
+            if (!itensContainer) return;
+            itensContainer.innerHTML = '';
+            // para cada item no array, cria um HTML
+            carrinho.forEach(item => {
+                const subTotal = (item.preco * item.quantidade).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+                const precoUnit = item.preco.toLocaleString
+                ('pt-BR', {style: 'currency', currency: 'BRL'});
+                const divItem=document.createElement('div');
+                divItem.className = "flex justify-between items-center border-b pb-4 mt-2";
+
+                divItem.innerHTML = `
+                <div class="flex-1">
+                    <h4 class="font-bold text-lg text-dark">${item.nome}</h4>
+                    <p class="text-sm text-muted">${precoUnit}</p>
+                    <p class="text-bold text-primary mt-1">${subTotal}</p>
+                    </div>
+
+                    <div class="flex items-center gap-3 bg-gray-100 p-2 rounded-xl">
+                        <button onclick="diminuirQuantidade('${item.id}')"
+                        class="w-8 h-8 flex justify-center items-center bg-white rounded-lg
+                        font-bold text-xl shadow-sm hover:text-primary
+                        active: scale-95 transition-all">-</button>
+                        <span class="font-bold text-lg w-4 text-center">${item.quantidade}</span>
+                        <button onclick="aumentarQuantidade('${item.id}')" class="w-8 h-8
+                        flex justify-center items-center bg-white rounded-lg font-bold
+                        text-xl shadow-sm hover:text-primary active:scale-95
+                        transition-all">+</button>
+                `;
+                itensContainer.appendChild(divItem);
+            })
+        }
+
+        //fechar pedido (Geolocalização API - GPS)
+        function fecharPedido(){
+            if (carrinho.length === 0){
+                const btnPedido = document.getElementById('btn-fechar-pedido');
+                if (!btnPedido) return;
+
+                const btnOriginalText = btnPedido.innerText;
+                btnPedido.innerText = "Buscando localização...";
+
+                navigator.geolocation.getCurrentPosition(
+                    //callback de sucesso
+                    (posicao) => {
+                        const lat = posicao.coords.latitude;
+                        const ing = posicao.coords.longitude;
+
+                        btnPedido.innerText = btnOriginalText;
+
+                        alert(`Pedido Fechado com Sucesso! 
+                        \nSua Localização: ${lat.toFixed(4)}, ${lmg.toFixed(4)}
+                        \nOs dados do carrinho serão limpos`);
+
+                        carrinho = [];
+                        fecharModalCarrinho();
+                        atualizarCarrinho();
+                    },
+                    //callback de erro
+                    (erro) => {
+                        btnPedido.innerText = btnOriginalText;
+                        console.error(erro);
+                        alert("Não foi possível obter sua localização.");
+                        carrinho = [];
+                        fecharModalCarrinho();
+                        atualizarCarrinho();
+                    }
+                );
+            }else {
+                alert(`Pedido Fechado com Sucesso!\n(navegador sem suporte GPS)`);
+                carrinho = [];
+                fecharModalCarrinho();
+                atualizarCarrinho();
+            }
+        }
+        inicializarCarrinho();
+            
+    })
+</script>
+
+</body>
+</html>
