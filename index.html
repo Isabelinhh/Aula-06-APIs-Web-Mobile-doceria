@@ -169,9 +169,7 @@
         <button data-cat="bolos caseiros" class="snap-start px-4 py-1 rounded-full bg-primary text-white font-bold text-sm transition-transform duration-150 cursor-pointer flex-shrink-0 btn-cat">
             Bolos Caseiros
         </button>
-        <button data-cat="bebidas" class="snap-start px-4 py-1 rounded-full bg-primary text-white font-bold text-sm transition-transform duration-150 cursor-pointer flex-shrink-0 btn-cat">
-            Bebidas
-        </button>
+    
         <button data-cat="sobremesas" class="snap-start px-4 py-1 rounded-full bg-primary text-white font-bold text-sm transition-transform duration-150 cursor-pointer flex-shrink-0 btn-cat">
             Sobremesas
         </button>
@@ -182,38 +180,40 @@
 
     <!-- MUDANÇA PARA GRID -->
             <!-- SUSHI E SASHIMI - separar por categoria -->
-            <div id="cat-Bolos Caseiros" class="categoria-conteudo">
+            <div id="cat-bolos caseiros" class="categoria-conteudo">
                 <div class="text-left text-dark font-extrabold text-[22px] mt-8 mb-4">Bolos Caseiros</div>
                 <!-- Bolos Caseiros -->
-                <div class="grid-cols-2 gap-4">
-                    <div
-                        class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
-                        <div class="absolute inset-0 z-0 cursor-pointer"
-                            onclick="abrirModalDetalhes('Bolo de Cenoura', 16.00, 'Bolo de Cenoura com cobertura de chocolate','./assets/img/bolodecenoura.avif', 's_1')">
+               <div class="grid-cols-2 gap-4">
+                <div
+                    class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
+                    <div class="absolute inset-0 z-0 cursor-pointer"
+                        onclick="abrirModalDetalhes('Bolo de Cenoura', 16.00, 'Bolo de Cenoura com recheio de Chocolate','./assets/img/bolodecenoura.avif', 's_1')">
 
-                        </div>
-                        <!-- Botão Favorito -->
-                        <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                            </svg>
-                        </button>
-
-                        <!-- nome e preço -->
-                        <img src="./ascets/bolodecenoura.avif" alt="Bolo de cenoura"
-                            class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
-                        <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
-                            <h4 class="font-bold text-sark text-sm leading-tight">Bolo de Cenoura</h4>
-                            <p class="text-primary font-black text-lg leading-none mt-1">R$16,00</p>
-                        </div>
-
-                        <!-- botão adicionar -->
-                        <button onclick="adicionarItem('s_1', 'Bolo de Cenoura', 16.00)"
-                            class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
                     </div>
+                    <!-- Botão Favorito -->
+                    <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                        </svg>
+                    </button>
+
+                    <!-- nome e preço -->
+                    <img src="./ascets/bolodecenoura.avif" alt="Bolo de Cenoura"
+                        class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
+                    <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
+                        <h4 class="font-bold text-sark text-sm leading-tight">Bolo de Cenoura</h4>
+                        <p class="text-primary font-black text-lg leading-none mt-1">R$16,00</p>
+                    </div>
+
+                    <!-- botão adicionar -->
+                    <button onclick="adicionarItem('s_1', 'Bolo de Cenoura', 16.00)"
+                        class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
                 </div>
+
+
+            </div>
             </div>
 
             <!--Bolo de chocolate-->
@@ -255,7 +255,7 @@
                 <div
                     class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
                     <div class="absolute inset-0 z-0 cursor-pointer"
-                        onclick="abrirModalDetalhes('Bolo de Fubá com Goiabada', 20.00, 'Bolo de Fubá recheado com Goiabada','./assets/img/bolofuba', 's_3')">
+                        onclick="abrirModalDetalhes('Bolo de Fubá com Goiabada', 20.00, 'Bolo de Fubá recheado com Goiabada','./assets/img/bolofuba.jpg', 's_3')">
 
                     </div>
                     <!-- Botão Favorito -->
@@ -381,14 +381,15 @@
     </div>
      </div>
      
-            // BEBIDAS -->
-            <div id="cat-bebidas" class="categoria-conteudo">
-                <div class="text-left text-dark font-extrabold text-[22px] mt-8 mb-4">Bebidas</div>
+             <!-- SOBREMESAS -->
+            <div id="cat-sobremesas" class="categoria-conteudo">
+                <div class="text-left text-dark font-extrabold text-[22px] mt-8 mb-4">Sobremesas</div>
+                <!-- sorvete -->
                 <div class="grid-cols-2 gap-4">
                     <div
                         class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
                         <div class="absolute inset-0 z-0 cursor-pointer"
-                            onclick="abrirModalDetalhes('Limonada', 20.00, ' Limonada - 300ml','./assets/img/limonada.webp', 's_5')">
+                            onclick="abrirModalDetalhes('Taça de Sorvete', 19.90, ' Sorvete - 3 bolas (escolha os sabores)','./assets/img/sorvete.webp', 's_4')">
 
                         </div>
                         <!-- Botão Favorito -->
@@ -401,27 +402,27 @@
                         </button>
 
                         <!-- nome e preço -->
-                        <img src="./assets/img/limonada.webp" alt="Limonada"
+                        <img src="./ascets/sorvete.webp" alt="Taça de Sorvete"
                             class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
                         <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
-                            <h4 class="font-bold text-sark text-sm leading-tight">Limonada</h4>
-                            <p class="text-primary font-black text-lg leading-none mt-1">R$20,00</p>
+                            <h4 class="font-bold text-sark text-sm leading-tight">Taça de Sorvete</h4>
+                            <p class="text-primary font-black text-lg leading-none mt-1">R$19,90</p>
                         </div>
 
                         <!-- botão adicionar -->
-                        <button onclick="adicionarItem('s_5', 'Limonada', 20.00)"
+                        <button onclick="adicionarItem('s_4', 'Taça de Sorvete', 19.90)"
                             class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
                     </div>
 
                 </div>
             </div>
 
-            <!-- Suco Natural -->
+            <!-- pudim -->
             <div class="grid-cols-2 gap-4">
                 <div
                     class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
                     <div class="absolute inset-0 z-0 cursor-pointer"
-                        onclick="abrirModalDetalhes('Suco Natural Laranja', 17.00, ' Suco de Laranja Natural - 300ml','./assets/img/suco.webp', 's_6')">
+                        onclick="abrirModalDetalhes('Pudim', 17.90, 'Pudim de leite condensado','./assets/img/pudim.webp', 's_5')">
 
                     </div>
                     <!-- Botão Favorito -->
@@ -434,27 +435,26 @@
                     </button>
 
                     <!-- nome e preço -->
-                    <img src="./assets/img/suco.webp" alt="Suco de Laranja"
+                    <img src="./ascets/pudim.webp" alt="Pudim"
                         class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
                     <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
-                        <h4 class="font-bold text-sark text-sm leading-tight">Suco Natural Laranja</h4>
-                        <p class="text-primary font-black text-lg leading-none mt-1">R$17,00</p>
+                        <h4 class="font-bold text-sark text-sm leading-tight">Pudim</h4>
+                        <p class="text-primary font-black text-lg leading-none mt-1">R$17,90</p>
                     </div>
 
                     <!-- botão adicionar -->
-                    <button onclick="adicionarItem('s_6', 'Suco Natural Laranja', 17.00)"
+                    <button onclick="adicionarItem('s_5', 'Pudim', 17.90)"
                         class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
                 </div>
 
             </div>
-            </div>
 
-            <!-- Refrigerante -->
+            <!-- mousse -->
             <div class="grid-cols-2 gap-4">
                 <div
                     class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
                     <div class="absolute inset-0 z-0 cursor-pointer"
-                        onclick="abrirModalDetalhes('Refrigerante', 8.00, ' Lata 350ml','./assets/img/refri.webp', 's_7')">
+                        onclick="abrirModalDetalhes('Mousse', 17.90, 'Escolha o sabor: Chocolate, Maracuja, Morango e Coco.','./assets/img/mousse.webp', 's_6')">
 
                     </div>
                     <!-- Botão Favorito -->
@@ -467,18 +467,17 @@
                     </button>
 
                     <!-- nome e preço -->
-                    <img src="./assets/img/refri.webp" alt="Refrigerante"
+                    <img src="./ascets/mousse.webp" alt="Mousse"
                         class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
                     <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
-                        <h4 class="font-bold text-sark text-sm leading-tight">Refrigerante</h4>
-                        <p class="text-primary font-black text-lg leading-none mt-1">R$8,00</p>
+                        <h4 class="font-bold text-sark text-sm leading-tight">Mousse</h4>
+                        <p class="text-primary font-black text-lg leading-none mt-1">R$17,90</p>
                     </div>
 
                     <!-- botão adicionar -->
-                    <button onclick="adicionarItem('s_7', 'Refrigerante', 8.00)"
+                    <button onclick="adicionarItem('s_6', 'Mousse', 17.90)"
                         class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
                 </div>
-
 
             </div>
             </div>
@@ -487,7 +486,7 @@
 
     
 
-    <div id="cat-sobremesas" class="categoria-conteudo">
+    <!-- <div id="cat-sobremesas" class="categoria-conteudo">
         <h3 class="text-primary text-xl mt-6 font-semibold">
         Sobremesas
     </h3>
@@ -527,14 +526,117 @@
     </div>
 
       <!-- SOBREMESAS -->
-            <div id="cat-sobremesas" class="categoria-conteudo">
+            <!-- <div id="cat-sobremesas" class="categoria-conteudo">
                 <div class="text-left text-dark font-extrabold text-[22px] mt-8 mb-4">Sobremesas</div>
                 <!-- sorvete -->
+                <!-- <div class="grid-cols-2 gap-4">
+                    <div
+                        class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
+                        <div class="absolute inset-0 z-0 cursor-pointer"
+                            onclick="abrirModalDetalhes('Taça de Sorvete', 19.90, ' Sorvete - 3 bolas (escolha os sabores)','./assets/img/sorvete.webp', 's_8')"> -->
+
+                        <!-- </div> -->
+                        <!-- Botão Favorito -->
+                        <!-- <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            </svg>
+                        </button> -->
+
+                        <!-- nome e preço -->
+                        <!-- <img src="./assets/img/sorvete.webp" alt="Taça de Sorvete"
+                            class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
+                        <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
+                            <h4 class="font-bold text-sark text-sm leading-tight">Taça de Sorvete</h4>
+                            <p class="text-primary font-black text-lg leading-none mt-1">R$19,90</p>
+                        </div> -->
+
+                        <!-- botão adicionar -->
+                        <!-- <button onclick="adicionarItem('s_8', 'Taça de Sorvete', 19.90)"
+                            class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
+                    </div>
+
+                </div>
+            </div> -->
+
+            <!-- pudim -->
+            <!-- <div class="grid-cols-2 gap-4">
+                <div
+                    class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
+                    <div class="absolute inset-0 z-0 cursor-pointer"
+                        onclick="abrirModalDetalhes('Pudim', 17.90, 'Pudim de leite condensado','./assets/img/pudim.webp', 's_9')"> -->
+
+                    <!-- </div> -->
+                    <!-- Botão Favorito -->
+                    <!-- <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                        </svg>
+                    </button> -->
+
+                    <!-- nome e preço -->
+                    <!-- <img src="./assets/img/pudim.webp" alt="Pudim"
+                        class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
+                    <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
+                        <h4 class="font-bold text-sark text-sm leading-tight">Pudim</h4>
+                        <p class="text-primary font-black text-lg leading-none mt-1">R$17,90</p>
+                    </div> -->
+
+                    <!-- botão adicionar -->
+                    <!-- <button onclick="adicionarItem('s_9', 'Pudim', 17.90)"
+                        class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
+                </div>
+
+            </div> -->
+
+            <!-- mousse -->
+            <!-- <div class="grid-cols-2 gap-4">
+                <div
+                    class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
+                    <div class="absolute inset-0 z-0 cursor-pointer"
+                        onclick="abrirModalDetalhes('Mousse', 17.90, 'Escolha o sabor: Chocolate, Maracuja, Morango e Coco.','./assets/img/mousse.webp', 's_10')">
+
+                    </div> -->
+                    <!-- Botão Favorito -->
+                    <!-- <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                        </svg>
+                    </button> -->
+
+                    <!-- nome e preço -->
+                    <!-- <img src="./assets/img/mousse.webp" alt="Mousse"
+                        class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
+                    <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
+                        <h4 class="font-bold text-sark text-sm leading-tight">Mousse</h4>
+                        <p class="text-primary font-black text-lg leading-none mt-1">R$17,90</p>
+                    </div> -->
+
+                    <!-- botão adicionar -->
+                    <!-- <button onclick="adicionarItem('s_10', 'Mousse', 17.90)"
+                        class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
+                </div>
+
+            </div>
+            </div>
+
+            </div>  -->
+
+             <!-- DOCINHOS -->
+            <div id="cat-docinhos" class="categoria-conteudo">
+                <div class="text-left text-dark font-extrabold text-[22px] mt-8 mb-4">Docinhos</div>
+                <!-- Brigadeiros -->
                 <div class="grid-cols-2 gap-4">
                     <div
                         class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
                         <div class="absolute inset-0 z-0 cursor-pointer"
-                            onclick="abrirModalDetalhes('Taça de Sorvete', 19.90, ' Sorvete - 3 bolas (escolha os sabores)','./assets/img/sorvete.webp', 's_8')">
+                            onclick="abrirModalDetalhes('Brigadeiro de Chocolate', 4.50, ' 1 unidade de Brigadeiro de chocolate com granulado','./assets/img/sorvete.webp', 's_7')">
 
                         </div>
                         <!-- Botão Favorito -->
@@ -547,27 +649,27 @@
                         </button>
 
                         <!-- nome e preço -->
-                        <img src="./assets/img/sorvete.webp" alt="Taça de Sorvete"
+                        <img src="./ascets/brigadeiro.jpg" alt="brigadeiro"
                             class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
                         <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
-                            <h4 class="font-bold text-sark text-sm leading-tight">Taça de Sorvete</h4>
-                            <p class="text-primary font-black text-lg leading-none mt-1">R$19,90</p>
+                            <h4 class="font-bold text-sark text-sm leading-tight">Brigadeiro de Chocolate</h4>
+                            <p class="text-primary font-black text-lg leading-none mt-1">R$ 4,50</p>
                         </div>
 
                         <!-- botão adicionar -->
-                        <button onclick="adicionarItem('s_8', 'Taça de Sorvete', 19.90)"
+                        <button onclick="adicionarItem('s_7', 'Brigadeiro de Chocolate', 4.50)"
                             class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
                     </div>
 
                 </div>
             </div>
 
-            <!-- pudim -->
+            <!-- BEIJINHO -->
             <div class="grid-cols-2 gap-4">
                 <div
                     class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
                     <div class="absolute inset-0 z-0 cursor-pointer"
-                        onclick="abrirModalDetalhes('Pudim', 17.90, 'Pudim de leite condensado','./assets/img/pudim.webp', 's_9')">
+                        onclick="abrirModalDetalhes('Beijinho', 3.50, '1 unidade de brigadeiro de beijinho ','./assets/img/pudim.webp', 's_8')">
 
                     </div>
                     <!-- Botão Favorito -->
@@ -580,56 +682,21 @@
                     </button>
 
                     <!-- nome e preço -->
-                    <img src="./assets/img/pudim.webp" alt="Pudim"
+                    <img src="./ascets/beijinho.avif" alt="beijinho"
                         class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
                     <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
-                        <h4 class="font-bold text-sark text-sm leading-tight">Pudim</h4>
-                        <p class="text-primary font-black text-lg leading-none mt-1">R$17,90</p>
+                        <h4 class="font-bold text-sark text-sm leading-tight">Beijinho</h4>
+                        <p class="text-primary font-black text-lg leading-none mt-1">R$3,50</p>
                     </div>
 
                     <!-- botão adicionar -->
-                    <button onclick="adicionarItem('s_9', 'Pudim', 17.90)"
+                    <button onclick="adicionarItem('s_8', 'Beijinho', 4.50)"
                         class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
                 </div>
 
             </div>
 
-            <!-- mousse -->
-            <div class="grid-cols-2 gap-4">
-                <div
-                    class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
-                    <div class="absolute inset-0 z-0 cursor-pointer"
-                        onclick="abrirModalDetalhes('Mousse', 17.90, 'Escolha o sabor: Chocolate, Maracuja, Morango e Coco.','./assets/img/mousse.webp', 's_10')">
-
-                    </div>
-                    <!-- Botão Favorito -->
-                    <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                        </svg>
-                    </button>
-
-                    <!-- nome e preço -->
-                    <img src="./assets/img/mousse.webp" alt="Mousse"
-                        class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
-                    <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
-                        <h4 class="font-bold text-sark text-sm leading-tight">Mousse</h4>
-                        <p class="text-primary font-black text-lg leading-none mt-1">R$17,90</p>
-                    </div>
-
-                    <!-- botão adicionar -->
-                    <button onclick="adicionarItem('s_10', 'Mousse', 17.90)"
-                        class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
-                </div>
-
-            </div>
-            </div>
-
-            </div>
-
-     
+      
     
     
 </section>
@@ -652,82 +719,172 @@
     </a>
 </aside>
 
-// script para botão categoria -->
- <!-- separar cada categoria -->
-<script>
-    const botoes = document.querySelectorAll('.btn-cat');
-    const conteudos = document.querySelectorAll('.categoria-conteudo');
 
-    function mudarCategoria(cat){
-        //mostra apenas a categoria selecionadas
-        conteudos.forEach(div => {
-            div.id === 'cat-' + cat ? div.classList.remove('hidden') : div.classList.add('hidden')
-    });
-    //atualiza o estilo do botão ativo
-    botoes.forEach(btn => {
-        if(btn.dataset.cat === cat){
-            btn.classList.add('bg-primary', 'text-white');
-            btn.classList.remove('bg-[#ebebeb]', 'text-dark');
-        }else{
-            btn.classList.remove('bg-primary', 'text-white');
-            btn.classList.add('bg-[#ebebeb]', 'text-dark')
-        }
-    });
-    }
+ <!-- MODAL DE DETALHES DO PRODUTO -->
+        <div id="detalhes-modal"
+            class="fixed inset-0 bg-black/70 z-[80] flex justify-center items-center opacity-0 pointer-events-none transition-opacity duration-300 px-4">
+            <div class="bg-white w-full max-w-[400px] rounded-[30px] overflow-hidden transform scale-95 transition-transform duration-300 relative flex flex-col"
+                id="detalhes-modal-content">
 
-    // //adiciona eventos a cada botão 
-    // botoes.forEach(btn => {
-    //     btn.addEventListener('touchstart', () => {
-    //         btn.classList.add('scale-95');
-            
-    //     });
-    //     btn.addEventListener('touchend', () => {
-    //         btn.classList('scale-95');
-    //     });
-    //     btn.addEventListener('click', () => {
-    //     mudarCategoria(btn.dataset.cat);
-    //     });
-    // });
+                <!-- Botão Fechar -->
+                <button onclick="fecharModalDetalhes()"
+                    class="absolute top-4 right-4 bg-white/80 backdrop-blur-md text-dark w-10 h-10 rounded-full flex justify-center items-center font-bold text-2xl shadow-sm z-10 hover:text-primary active:scale-90 transition-all">&times;</button>
 
-    //ativa scroll suave para links internos
-    let startX = 0;
-    let startY = 0;
+                <!-- Imagem -->
+                <div class="w-full h-[280px] bg-gray-50 flex justify-center items-center p-8 relative">
+                    <div class="absolute inset-0 bg-gradient-to-b from-gray-100 to-white opacity-50"></div>
+                    <img id="detalhes-img" src="" alt="Produto"
+                        class="w-full h-full object-contain drop-shadow-xl relative z-10 transition-transform duration-500 hover:scale-105">
+                </div>
 
-    //evento de cada botão 
-    botoes.forEach(btn => {
-        //touchstart é disparado assim que o dedo toca a tela 
-        btn.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-             //aplica class tailwind para efeito de clique
-             btn.classList.add('scale-95', 'opacity-80');
-        });
-        //touchend quando tira o dedo da tela 
-        btn.addEventListener('touchend', (e) => {
-            //remove efeito 
-            btn.classList.remove('scale-95', 'opacity-80');
-            //ultima posição do dedo antes de levantar
-            const endX = e.changedTouches[0].clientX;
-            const endY = e.changed.Touches[0].clientY;
-            //clacula distância percorrida oelo dedo em pixels
-            const deltaX = Math.abs(endX - startX);
-             const deltaY = Math.abs(endX - startY);
-             //logica matemática se moveu menos de 10px = clique intencional
-             if (deltaX < 10 && deltaY < 10) {
-                mudarCategoria(btn.dataset.cat);
-             }
+                <!-- Infos -->
+                <div class="p-6">
+                    <h2 id="detalhes-nome" class="text-3xl font-black text-dark mb-1 leading-tight tracking-tight">Nome
+                        do
+                        Produto</h2>
+                    <p id="detalhes-preco" class="text-2xl font-black text-primary mb-4 drop-shadow-sm">R$ 0,00</p>
+                    <div class="bg-gray-50 rounded-xl p-4 mb-6">
+                        <p id="detalhes-desc" class="text-gray-600 text-sm leading-relaxed font-medium">Descrição
+                            detalhada
+                            do produto vai aqui...</p>
+                    </div>
 
-        });
-        //touchcancel se o celular aparecer uma lição ou notificação popup
-        btn.addEventListener('touchcancel', () => {
-            btn.classList.remove('scale-95', 'opacity-80');
-        });
-        //click para usuários dektop
-        btn.addEventListener('click', () => {
-            mudarCategoria(btn.dataset.cat);
-        })
+                    <button id="detalhes-btn-add"
+                        class="w-full bg-gradient-to-r from-primary to-[#a82d2f] text-white py-4 rounded-xl text-[17px] font-extrabold shadow-[0_8px_20px_-6px_rgba(202,60,63,0.5)] hover:shadow-[0_8px_25px_-4px_rgba(202,60,63,0.6)] active:scale-[0.98] transition-all outline-none flex justify-center items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                            stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                        Adicionar ao Pedido
+                    </button>
+                </div>
+            </div>
+        </div>
 
-          //logica do carrinho, loclstorage e apis
+        <!-- RODAPÉ CARRINHO FIXO (Abre Modal) -->
+        <div id="carrinho-footer"
+            class="fixed bottom-0 left-0 w-full bg-primary text-white p-4 z-50 shadow-[0_-4px_6px_rgba(0,0,0,0.1)] transform translate-y-full transition-transform duration-300 flex justify-between items-center cursor-pointer"
+            onclick="abrirModalCarrinho()">
+            <div>
+                <p class="text-sm font-medium">Resumo do Pedido</p>
+                <p class="text-xl font-bold">Total: <span id="carrinho-total">R$ 0,00</span></p>
+            </div>
+            <button
+                class="bg-white text-primary px-4 py-2 rounded-lg font-bold shadow-md active:scale-95 transition-all">
+                Ver Carrinho
+            </button>
+        </div>
+
+        <!-- MODAL DO CARRINHO (Detalhes) -->
+        <div id="carrinho-modal"
+            class="fixed inset-0 bg-black/60 z-[60] flex flex-col justify-end sm:justify-center items-center opacity-0 pointer-events-none transition-opacity duration-300">
+
+            <!-- Conteúdo do Modal -->
+            <div class="bg-white w-full sm:w-[500px] h-[85vh] sm:h-auto sm:max-h-[85vh] rounded-t-3xl sm:rounded-2xl flex flex-col transform translate-y-full sm:translate-y-0 sm:scale-95 transition-transform duration-300"
+                id="carrinho-modal-content">
+
+                <!-- Cabelho Modal -->
+                <div class="p-5 border-b flex justify-between items-center">
+                    <h2 class="text-2xl font-bold text-dark">Seu Carrinho</h2>
+                    <button onclick="fecharModalCarrinho()"
+                        class="text-3xl font-bold text-muted hover:text-dark focus:outline-none">&times;</button>
+                </div>
+
+                <!-- Corpo Modal (Itens) -->
+                <div id="carrinho-itens-container" class="p-5 flex-1 overflow-y-auto flex flex-col gap-4">
+                    <!-- Itens serão injetados aqui via JS -->
+                </div>
+
+                <!-- Rodapé Modal (Checkout) -->
+                <div class="p-5 border-t bg-gray-50 rounded-b-3xl sm:rounded-b-2xl">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-lg font-bold">Total do Pedido:</span>
+                        <span id="modal-carrinho-total" class="text-2xl font-black text-primary">R$ 0,00</span>
+                    </div>
+                    <button onclick="fecharPedido()" id="btn-fechar-pedido"
+                        class="w-full bg-primary text-white py-3 rounded-xl text-lg font-bold shadow-lg hover:bg-red-700 active:scale-95 transition-all">
+                        Fechar Pedido (Usar GPS)
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- script para botão categoria -->
+        <!-- separar cada categoria -->
+        <script>
+            const botoes = document.querySelectorAll('.btn-cat');
+            const conteudos = document.querySelectorAll('.categoria-conteudo');
+
+            function mudarCategoria(cat) {
+                //mostra apenas a categoria selecionadas
+                conteudos.forEach(div => {
+                    div.id === 'cat-' + cat ? div.classList.remove('hidden') : div.classList.add('hidden')
+                });
+                //atualiza o estilo do botão ativo
+                botoes.forEach(btn => {
+                    if (btn.dataset.cat === cat) {
+                        btn.classList.add('bg-primary', 'text-white');
+                        btn.classList.remove('bg-[#ebebeb]', 'text-dark');
+                    } else {
+                        btn.classList.remove('bg-primary', 'text-white');
+                        btn.classList.add('bg-[#ebebeb]', 'text-dark')
+                    }
+                });
+            }
+
+            // //adiciona eventos a cada botão
+            // botoes.forEach(btn => {
+            //     btn.addEventListener('touchstart', () => {
+            //         btn.classList.add('scale-95');
+            //         mudarCategoria(btn.dataset.cat);
+            //     });
+            //     btn.addEventListener('touchend', () => {
+            //         btn.classList.remove('scale-95');
+            //     });
+            //     btn.addEventListener('click', () => {
+            //         mudarCategoria(btn.dataset.cat)
+            //     });
+            // });
+
+          let startX = 0;
+            let startY = 0;
+
+            //evento de cada botão
+            botoes.forEach(btn => {
+                //touchstart é disparado assim que o dedo toca a tela
+                btn.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                    //aplica class tailwind para efeito de clique
+                    btn.classList.add('scale-95', 'opacity-80');
+                });
+                //touchend quando tira o dedo da tela
+                btn.addEventListener('touchend', (e) => {
+                    //remove efeito visual
+                    btn.classList.remove('scale-95', 'opacity-80');
+                    //ultima posição deo dedo antes de levantar
+                    const endX = e.changedTouches[0].clientX;
+                    const endY = e.changedTouches[0].clientY;
+                    //calcula distancia do mov.
+                    const deltaX = Math.abs(endX - startX);
+                    const deltaY = Math.abs(endY - startY);
+                    //logica matemática se move menos de 10px = clique intensional
+                    if (deltaX < 10 && deltaY < 10) {
+                        mudarCategoria(btn.dataset.cat);
+                    }
+                });
+                //touchcancel se o calcular aparecer uma ligação ou notificação popup
+                btn.addEventListener('touchcancel', () => {
+                    btn.classList.remove('scale-95', 'opacity-80');
+                });
+                //click para usuarios desktop
+                btn.addEventListener('click', () => {
+                    mudarCategoria(btn.dataset.cat);
+                });
+            });
+
+            //logica do carrinho, loclstorage e apis
             //modal detalhes do produto
 
             const modalDetalhes = document.getElementById('detalhes-modal');
@@ -944,8 +1101,8 @@
         }
         inicializarCarrinho();
             
-    })
-</script>
+        </script>
 
-</body>
+    </body>
+
 </html>
