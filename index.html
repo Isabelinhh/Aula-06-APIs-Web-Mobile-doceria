@@ -157,549 +157,239 @@
 </section>
 
 <!--  CARDÁPIO -->
-<section id="cardapio"
-         class="max-w-[90vw] mx-auto mt-[5vh] p-8">
+    <section id="cardapio"
+        class="max-w-[700px] mx-auto mt-24 pt-12 pb-4 px-4 text-center border-t border-dashed border-gray-400">
+        <h2 class="text-3xl font-black mb-8">Cardápio</h2>
 
-    <h2 class="text-3xl font-bold text-center mb-8">
-        Cardápio
-    </h2>
+        <nav id="nav-categorias" class="overflow-x-auto whitespace-nowrap snap-x flex gap-2 mt-6 pb-2">
+            <div class="animate-pulse flex gap-2">
+                <div class="h-10 w-24 bg-gray-200 rounded-full"></div>
+                <div class="h-10 w-24 bg-gray-200 rounded-full"></div>
+                <div class="h-10 w-24 bg-gray-200 rounded-full"></div>
+            </div>
+        </nav>
 
-    <!-- inicio botoes de menu - categoria -->
-    <nav id="nav-categorias" class="overflow-x-auto whitespace-nowrap snap-x flex gap-2 mt-6 pb-1">
-        <button data-cat="bolos caseiros" class="snap-start px-4 py-1 rounded-full bg-primary text-white font-bold text-sm transition-transform duration-150 cursor-pointer flex-shrink-0 btn-cat">
-            Bolos Caseiros
-        </button>
-    
-        <button data-cat="sobremesas" class="snap-start px-4 py-1 rounded-full bg-primary text-white font-bold text-sm transition-transform duration-150 cursor-pointer flex-shrink-0 btn-cat">
-            Sobremesas
-        </button>
-         <button data-cat="docinhos" class="snap-start px-4 py-1 rounded-full bg-primary text-white font-bold text-sm transition-transform duration-150 cursor-pointer flex-shrink-0 btn-cat">
-            Docinhos
-        </button>
-    </nav>
+        <div id="produtos-container" class="mt-8">
+            <div id="categoria-titulo"
+                class="text-left text-dark font-black text-2xl mb-6 border-l-4 border-primary pl-4">
+                Carregando...
+            </div>
+            <div id="lista-produtos" class="grid grid-cols-2 gap-4 lg:gap-6">
+                <!-- Injetado via JS -->
+            </div>
+        </div>
+    </section>
 
-    <!-- MUDANÇA PARA GRID -->
-            <!-- SUSHI E SASHIMI - separar por categoria -->
-            <div id="cat-bolos caseiros" class="categoria-conteudo">
-                <div class="text-left text-dark font-extrabold text-[22px] mt-8 mb-4">Bolos Caseiros</div>
-                <!-- Bolos Caseiros -->
-               <div class="grid-cols-2 gap-4">
-                <div
-                    class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
-                    <div class="absolute inset-0 z-0 cursor-pointer"
-                        onclick="abrirModalDetalhes('Bolo de Cenoura', 16.00, 'Bolo de Cenoura com recheio de Chocolate','./assets/img/bolodecenoura.avif', 's_1')">
+    <script>
+        const API_URL = 'https://aula-7-backend-vercel-doceria-g6ey-jrmg1vinu.vercel.app/api';
+        const navCategorias = document.getElementById('nav-categorias');
+        const listaProdutos = document.getElementById('lista-produtos');
+        const categoriaTitulo = document.getElementById('categoria-titulo');
+        let categoriasData = [];
+        let carrinho = [];
 
+        async function carregarCategorias() {
+            try {
+                const response = await fetch(`${API_URL}/categorias`);
+                categoriasData = await response.json();
+                renderizarBotoesCategorias();
+                if (categoriasData.length > 0) {
+                    selecionarCategoria(categoriasData[0].id, categoriasData[0].nome);
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                navCategorias.innerHTML = '<p class="text-red-500 font-bold">Erro ao carregar menu.</p>';
+            }
+        }
+
+        function renderizarBotoesCategorias() {
+            navCategorias.innerHTML = '';
+            categoriasData.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = `snap-start px-6 py-2 rounded-full font-bold text-sm transition-all duration-300 cursor-pointer flex-shrink-0 btn-cat bg-gray-200 text-dark`;
+                btn.innerText = cat.nome.toUpperCase();
+                btn.onclick = () => selecionarCategoria(cat.id, cat.nome);
+                btn.dataset.id = cat.id;
+                navCategorias.appendChild(btn);
+            });
+        }
+
+        async function selecionarCategoria(id, nome) {
+            categoriaTitulo.innerText = nome;
+            const botoes = document.querySelectorAll('.btn-cat');
+            botoes.forEach(btn => {
+                if (parseInt(btn.dataset.id) === id) {
+                    btn.classList.add('bg-primary', 'text-white', 'shadow-md');
+                    btn.classList.remove('bg-gray-200', 'text-dark');
+                } else {
+                    btn.classList.remove('bg-primary', 'text-white', 'shadow-md');
+                    btn.classList.add('bg-gray-200', 'text-dark');
+                }
+            });
+            carregarProdutos(id);
+        }
+
+        async function carregarProdutos(categoriaId) {
+            listaProdutos.innerHTML = '<div class="col-span-2 py-10 flex justify-center"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div></div>';
+            try {
+                const response = await fetch(`${API_URL}/produtos?categoriaId=${categoriaId}`);
+                const produtos = await response.json();
+                renderizarProdutos(produtos);
+            } catch (error) {
+                console.error('Erro:', error);
+                listaProdutos.innerHTML = '<p class="col-span-2 text-red-500 font-bold">Erro ao carregar produtos.</p>';
+            }
+        }
+
+        function renderizarProdutos(produtos) {
+            listaProdutos.innerHTML = '';
+            if (produtos.length === 0) {
+                listaProdutos.innerHTML = '<p class="col-span-2 text-muted py-10">Nenhum produto nesta categoria.</p>';
+                return;
+            }
+            produtos.forEach(p => {
+                const precoFormatado = p.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                const imgSource = (p.imagem && p.imagem.startsWith('http')) ? p.imagem : `./assets/img/${p.imagem || 'logo.png'}`;
+
+                // Sanitização da descrição
+                const descSanitizada = (p.descricao || '').replace(/'/g, "\\'").replace(/\n/g, " ");
+
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-[25px] p-4 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-xl transition-all duration-300 group";
+                card.innerHTML = `
+                    <div class="absolute inset-0 z-0 cursor-pointer" onclick="abrirModalDetalhes('${p.nome}', ${p.preco}, '${descSanitizada}', '${imgSource}', '${p.id}')"></div>
+                    <div class="h-32 flex justify-center items-center mb-4 relative z-10 pointer-events-none">
+                        <img src="${imgSource}" alt="${p.nome}" class="max-h-full max-w-full object-contain transition-transform duration-500 drop-shadow-md group-hover:scale-110" onerror="this.src='./assets/img/logo.png'">
                     </div>
-                    <!-- Botão Favorito -->
-                    <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                        </svg>
+                    <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
+                        <h4 class="font-bold text-dark text-sm leading-tight h-10 overflow-hidden line-clamp-2">${p.nome}</h4>
+                        <p class="text-primary font-black text-xl mt-1">${precoFormatado}</p>
+                    </div>
+                    <button onclick="adicionarItem('${p.id}', '${p.nome}', ${p.preco})" 
+                        class="w-full bg-primary text-white py-3 rounded-2xl text-xs font-black mt-3 shadow-md hover:bg-black active:scale-95 transition-all z-10 relative">
+                        Adicionar 
                     </button>
+                    `;
+                listaProdutos.appendChild(card);
+            });
+        }
 
-                    <!-- nome e preço -->
-                    <img src="./ascets/bolodecenoura.avif" alt="Bolo de Cenoura"
-                        class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
-                    <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
-                        <h4 class="font-bold text-sark text-sm leading-tight">Bolo de Cenoura</h4>
-                        <p class="text-primary font-black text-lg leading-none mt-1">R$16,00</p>
+        // --- CARRINHO LOGIC ---
+        function adicionarItem(id, nome, preco) {
+            if (navigator.vibrate) navigator.vibrate(50);
+            const index = carrinho.findIndex(item => item.id === id);
+            if (index !== -1) carrinho[index].quantidade++;
+            else carrinho.push({ id, nome, preco, quantidade: 1 });
+            atualizarCarrinho();
+        }
+
+        function atualizarCarrinho() {
+            localStorage.setItem('haruy_carrinho', JSON.stringify(carrinho));
+            const total = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
+            const formatado = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+            document.getElementById('carrinho-total').innerText = formatado;
+            document.getElementById('modal-carrinho-total').innerText = formatado;
+
+            if (carrinho.length > 0) document.getElementById('carrinho-footer').classList.remove('translate-y-full');
+            else document.getElementById('carrinho-footer').classList.add('translate-y-full');
+
+            renderizarItensModal();
+        }
+
+        function renderizarItensModal() {
+            const container = document.getElementById('carrinho-itens-container');
+            if (!container) return;
+            container.innerHTML = '';
+            carrinho.forEach(item => {
+                const subTotal = (item.preco * item.quantidade).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                const div = document.createElement('div');
+                div.className = "flex justify-between items-center bg-gray-50 p-4 rounded-xl";
+                div.innerHTML = `
+                    <div class="flex-1 pr-4">
+                        <h4 class="font-bold text-dark">${item.nome}</h4>
+                        <p class="text-primary font-black mt-1">${subTotal}</p>
                     </div>
-
-                    <!-- botão adicionar -->
-                    <button onclick="adicionarItem('s_1', 'Bolo de Cenoura', 16.00)"
-                        class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
-                </div>
-
-
-            </div>
-            </div>
-
-            <!--Bolo de chocolate-->
-            <div class="grid-cols-2 gap-4">
-                <div
-                    class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
-                    <div class="absolute inset-0 z-0 cursor-pointer"
-                        onclick="abrirModalDetalhes('Bolo de Chocolate', 17.00, 'Bolo de Chocolate com recheio de Chocolate','./assets/img/bolochocolate.jpg', 's_2')">
-
+                    <div class="flex items-center gap-3 bg-white p-2 rounded-xl shadow-sm">
+                        <button onclick="alterarQtd('${item.id}', -1)" class="w-8 h-8 font-black text-xl hover:text-primary">-</button>
+                        <span class="font-black text-lg w-4 text-center">${item.quantidade}</span>
+                        <button onclick="alterarQtd('${item.id}', 1)" class="w-8 h-8 font-black text-xl hover:text-primary">+</button>
                     </div>
-                    <!-- Botão Favorito -->
-                    <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                        </svg>
-                    </button>
-
-                    <!-- nome e preço -->
-                    <img src="./ascets/bolochocolate.jpg" alt="Bolo de Chocolate"
-                        class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
-                    <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
-                        <h4 class="font-bold text-sark text-sm leading-tight">Bolo de chocolate</h4>
-                        <p class="text-primary font-black text-lg leading-none mt-1">R$17,00</p>
-                    </div>
-
-                    <!-- botão adicionar -->
-                    <button onclick="adicionarItem('s_2', 'Bolo de Chocolate', 17.00)"
-                        class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
-                </div>
-
-
-            </div>
-            </div>
-
-            <!-- Bolo de Fubá c/ goiabada-->
-            <div class="grid-cols-2 gap-4">
-                <div
-                    class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
-                    <div class="absolute inset-0 z-0 cursor-pointer"
-                        onclick="abrirModalDetalhes('Bolo de Fubá com Goiabada', 20.00, 'Bolo de Fubá recheado com Goiabada','./assets/img/bolofuba.jpg', 's_3')">
-
-                    </div>
-                    <!-- Botão Favorito -->
-                    <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                        </svg>
-                    </button>
-
-                    <!-- nome e preço -->
-                    <img src="./ascets/bolofuba.jpg" alt="Bolo de Fubá com Goiabada"
-                        class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
-                    <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
-                        <h4 class="font-bold text-sark text-sm leading-tight">Bolo de Fubá com Goiabada</h4>
-                        <p class="text-primary font-black text-lg leading-none mt-1">R$ 20,00</p>
-                    </div>
-
-                    <!-- botão adicionar -->
-                    <button onclick="adicionarItem('s_3', 'Bolo de Fubá com Goiabada', 20.00)"
-                        class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
-                </div>
-
-            </div>
-            </div>
-
-            </div>
-
-    <!-- fim do botao menu - categoria -->
- <!-- MUDANÇA PARA GRID -->
-    <!-- - separar por categoria-->
-     <!-- <div id="cat-bolos caseiros" class="categoria-conteudo">
-        <h3 class="text-primary text-xl mt-6 font-semibold">
-        Bolos Caseiros
-    </h3>
-
-    <div class="mt-4 space-y-4"> -->
-
-        <!-- <article>
-            <div class="flex justify-between">
-                <h4 class="font-bold text-lg">Bolo de Chocolate</h4>
-                <span class="text-primary">R$ 17,00</span>
-            </div>
-            <p class="text-sm text-gray-500">
-               Bolo de chocolate caseiro com receheio de Chocolate
-            </p>
-        </article>
-
-        <article>
-            <div class="flex justify-between">
-                <h4 class="font-bold text-lg">Bolo de Cenoura</h4>
-                <span class="text-primary">R$ 15,00</span>
-            </div>
-            <p class="text-sm text-gray-500">
-              Bolo de cenoura caseiro com recheiio de chocolate
-            </p>
-        </article>
-
-        <article>
-            <div class="flex justify-between">
-                <h4 class="font-bold text-lg">Bolo de Milho</h4>
-                <span class="text-primary">R$ 20,00</span>
-            </div>
-            <p class="text-sm text-gray-500">
-               Bolo de Milho caseiro cremoso 
-            </p>
-        </article>
-
-        <article>
-            <div class="flex justify-between">
-                <h4 class="font-bold text-lg">Bolo de Fubá</h4>
-                <span class="text-primary">R$ 15,00</span>
-            </div>
-            <p class="text-sm text-gray-500">
-              Bolo de Fubá caseiro
-            </p>
-        </article>
-
-    </div>
-     </div> -->
-    
-
-    <!-- Bolos de Aniverssário
-     <div id="cat-bebidas" class="categoria-conteudo">
-        <h3 class="text-primary text-xl mt-10 font-semibold">
-        Bolos de Aniverssário
-    </h3>
-
-    <div class="mt-4 space-y-4">
-
-        <article>
-            <div class="flex justify-between">
-                <h4 class="font-bold text-lg">Água</h4>
-                <span class="text-primary">R$ 6,00</span>
-            </div>
-            <p class="text-sm text-gray-500">
-               300ml 
-            </p>
-        </article>
-
-        <article>
-            <div class="flex justify-between">
-                <h4 class="font-bold text-lg">Suco Natural Laranja</h4>
-                <span class="text-primary">R$ 17,00</span>
-            </div>
-            <p class="text-sm text-gray-500">
-                Suco de Laranja Natural - 300ml
-            </p>
-        </article>
-
-
-        <article>
-            <div class="flex justify-between">
-                <h4 class="font-bold text-lg">Refrigerante</h4>
-                <span class="text-primary">R$ 8,00</span>
-            </div>
-            <p class="text-sm text-gray-500">
-                Lata 350ml
-            </p>
-        </article>
-
-    </div>
-     </div>
-     
-             <!-- SOBREMESAS -->
-            <div id="cat-sobremesas" class="categoria-conteudo">
-                <div class="text-left text-dark font-extrabold text-[22px] mt-8 mb-4">Sobremesas</div>
-                <!-- sorvete -->
-                <div class="grid-cols-2 gap-4">
-                    <div
-                        class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
-                        <div class="absolute inset-0 z-0 cursor-pointer"
-                            onclick="abrirModalDetalhes('Taça de Sorvete', 19.90, ' Sorvete - 3 bolas (escolha os sabores)','./assets/img/sorvete.webp', 's_4')">
-
-                        </div>
-                        <!-- Botão Favorito -->
-                        <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                            </svg>
-                        </button>
-
-                        <!-- nome e preço -->
-                        <img src="./ascets/sorvete.webp" alt="Taça de Sorvete"
-                            class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
-                        <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
-                            <h4 class="font-bold text-sark text-sm leading-tight">Taça de Sorvete</h4>
-                            <p class="text-primary font-black text-lg leading-none mt-1">R$19,90</p>
-                        </div>
-
-                        <!-- botão adicionar -->
-                        <button onclick="adicionarItem('s_4', 'Taça de Sorvete', 19.90)"
-                            class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- pudim -->
-            <div class="grid-cols-2 gap-4">
-                <div
-                    class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
-                    <div class="absolute inset-0 z-0 cursor-pointer"
-                        onclick="abrirModalDetalhes('Pudim', 17.90, 'Pudim de leite condensado','./assets/img/pudim.webp', 's_5')">
-
-                    </div>
-                    <!-- Botão Favorito -->
-                    <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                        </svg>
-                    </button>
-
-                    <!-- nome e preço -->
-                    <img src="./ascets/pudim.webp" alt="Pudim"
-                        class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
-                    <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
-                        <h4 class="font-bold text-sark text-sm leading-tight">Pudim</h4>
-                        <p class="text-primary font-black text-lg leading-none mt-1">R$17,90</p>
-                    </div>
-
-                    <!-- botão adicionar -->
-                    <button onclick="adicionarItem('s_5', 'Pudim', 17.90)"
-                        class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
-                </div>
-
-            </div>
-
-            <!-- mousse -->
-            <div class="grid-cols-2 gap-4">
-                <div
-                    class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
-                    <div class="absolute inset-0 z-0 cursor-pointer"
-                        onclick="abrirModalDetalhes('Mousse', 17.90, 'Escolha o sabor: Chocolate, Maracuja, Morango e Coco.','./assets/img/mousse.webp', 's_6')">
-
-                    </div>
-                    <!-- Botão Favorito -->
-                    <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                        </svg>
-                    </button>
-
-                    <!-- nome e preço -->
-                    <img src="./ascets/mousse.webp" alt="Mousse"
-                        class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
-                    <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
-                        <h4 class="font-bold text-sark text-sm leading-tight">Mousse</h4>
-                        <p class="text-primary font-black text-lg leading-none mt-1">R$17,90</p>
-                    </div>
-
-                    <!-- botão adicionar -->
-                    <button onclick="adicionarItem('s_6', 'Mousse', 17.90)"
-                        class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
-                </div>
-
-            </div>
-            </div>
-
-            </div>
-
-    
-
-    <!-- <div id="cat-sobremesas" class="categoria-conteudo">
-        <h3 class="text-primary text-xl mt-6 font-semibold">
-        Sobremesas
-    </h3>
-
-    <div class="mt-4 space-y-4">
-
-        <article>
-            <div class="flex justify-between">
-                <h4 class="font-bold text-lg">Taça de Sorvete</h4>
-                <span class="text-primary">R$ 19,90</span>
-            </div>
-            <p class="text-sm text-gray-500">
-                Sorvete - 3 bolas (escolha os sabores)
-            </p>
-        </article>
-
-        <article>
-            <div class="flex justify-between">
-                <h4 class="font-bold text-lg">Pudim</h4>
-                <span class="text-primary">R$ 17,90</span>
-            </div>
-            <p class="text-sm text-gray-500">
-                Pudim de leite condensado
-            </p>
-        </article>
-
-        <article>
-            <div class="flex justify-between">
-                <h4 class="font-bold text-lg">Mousse</h4>
-                <span class="text-primary">R$ 17,90</span>
-            </div>
-            <p class="text-sm text-gray-500">
-                Escolha o sabor: Chocolate, Maracuja, Morango e Coco.
-            </p>
-        </article>
-    </div>
-    </div>
-
-      <!-- SOBREMESAS -->
-            <!-- <div id="cat-sobremesas" class="categoria-conteudo">
-                <div class="text-left text-dark font-extrabold text-[22px] mt-8 mb-4">Sobremesas</div>
-                <!-- sorvete -->
-                <!-- <div class="grid-cols-2 gap-4">
-                    <div
-                        class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
-                        <div class="absolute inset-0 z-0 cursor-pointer"
-                            onclick="abrirModalDetalhes('Taça de Sorvete', 19.90, ' Sorvete - 3 bolas (escolha os sabores)','./assets/img/sorvete.webp', 's_8')"> -->
-
-                        <!-- </div> -->
-                        <!-- Botão Favorito -->
-                        <!-- <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                            </svg>
-                        </button> -->
-
-                        <!-- nome e preço -->
-                        <!-- <img src="./assets/img/sorvete.webp" alt="Taça de Sorvete"
-                            class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
-                        <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
-                            <h4 class="font-bold text-sark text-sm leading-tight">Taça de Sorvete</h4>
-                            <p class="text-primary font-black text-lg leading-none mt-1">R$19,90</p>
-                        </div> -->
-
-                        <!-- botão adicionar -->
-                        <!-- <button onclick="adicionarItem('s_8', 'Taça de Sorvete', 19.90)"
-                            class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
-                    </div>
-
-                </div>
-            </div> -->
-
-            <!-- pudim -->
-            <!-- <div class="grid-cols-2 gap-4">
-                <div
-                    class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
-                    <div class="absolute inset-0 z-0 cursor-pointer"
-                        onclick="abrirModalDetalhes('Pudim', 17.90, 'Pudim de leite condensado','./assets/img/pudim.webp', 's_9')"> -->
-
-                    <!-- </div> -->
-                    <!-- Botão Favorito -->
-                    <!-- <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                        </svg>
-                    </button> -->
-
-                    <!-- nome e preço -->
-                    <!-- <img src="./assets/img/pudim.webp" alt="Pudim"
-                        class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
-                    <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
-                        <h4 class="font-bold text-sark text-sm leading-tight">Pudim</h4>
-                        <p class="text-primary font-black text-lg leading-none mt-1">R$17,90</p>
-                    </div> -->
-
-                    <!-- botão adicionar -->
-                    <!-- <button onclick="adicionarItem('s_9', 'Pudim', 17.90)"
-                        class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
-                </div>
-
-            </div> -->
-
-            <!-- mousse -->
-            <!-- <div class="grid-cols-2 gap-4">
-                <div
-                    class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
-                    <div class="absolute inset-0 z-0 cursor-pointer"
-                        onclick="abrirModalDetalhes('Mousse', 17.90, 'Escolha o sabor: Chocolate, Maracuja, Morango e Coco.','./assets/img/mousse.webp', 's_10')">
-
-                    </div> -->
-                    <!-- Botão Favorito -->
-                    <!-- <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                        </svg>
-                    </button> -->
-
-                    <!-- nome e preço -->
-                    <!-- <img src="./assets/img/mousse.webp" alt="Mousse"
-                        class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
-                    <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
-                        <h4 class="font-bold text-sark text-sm leading-tight">Mousse</h4>
-                        <p class="text-primary font-black text-lg leading-none mt-1">R$17,90</p>
-                    </div> -->
-
-                    <!-- botão adicionar -->
-                    <!-- <button onclick="adicionarItem('s_10', 'Mousse', 17.90)"
-                        class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
-                </div>
-
-            </div>
-            </div>
-
-            </div>  -->
-
-             <!-- DOCINHOS -->
-            <div id="cat-docinhos" class="categoria-conteudo">
-                <div class="text-left text-dark font-extrabold text-[22px] mt-8 mb-4">Docinhos</div>
-                <!-- Brigadeiros -->
-                <div class="grid-cols-2 gap-4">
-                    <div
-                        class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
-                        <div class="absolute inset-0 z-0 cursor-pointer"
-                            onclick="abrirModalDetalhes('Brigadeiro de Chocolate', 4.50, ' 1 unidade de Brigadeiro de chocolate com granulado','./assets/img/sorvete.webp', 's_7')">
-
-                        </div>
-                        <!-- Botão Favorito -->
-                        <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                            </svg>
-                        </button>
-
-                        <!-- nome e preço -->
-                        <img src="./ascets/brigadeiro.jpg" alt="brigadeiro"
-                            class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
-                        <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
-                            <h4 class="font-bold text-sark text-sm leading-tight">Brigadeiro de Chocolate</h4>
-                            <p class="text-primary font-black text-lg leading-none mt-1">R$ 4,50</p>
-                        </div>
-
-                        <!-- botão adicionar -->
-                        <button onclick="adicionarItem('s_7', 'Brigadeiro de Chocolate', 4.50)"
-                            class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- BEIJINHO -->
-            <div class="grid-cols-2 gap-4">
-                <div
-                    class="bg-white rounded-[20px] p-3 shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition-shadow group">
-                    <div class="absolute inset-0 z-0 cursor-pointer"
-                        onclick="abrirModalDetalhes('Beijinho', 3.50, '1 unidade de brigadeiro de beijinho ','./assets/img/pudim.webp', 's_8')">
-
-                    </div>
-                    <!-- Botão Favorito -->
-                    <button class="absolute top-3 right-3 text-gray-300 hover:text-primary transition-colors z-10">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                        </svg>
-                    </button>
-
-                    <!-- nome e preço -->
-                    <img src="./ascets/beijinho.avif" alt="beijinho"
-                        class="w-full h-24 object-contain mb-2 mt-2 transition-transform duration-300 drop-shadow-sm group-hover:scale-105 pointer-events-none relative z-10">
-                    <div class="text-left w-full mt-auto relative z-10 pointer-events-none">
-                        <h4 class="font-bold text-sark text-sm leading-tight">Beijinho</h4>
-                        <p class="text-primary font-black text-lg leading-none mt-1">R$3,50</p>
-                    </div>
-
-                    <!-- botão adicionar -->
-                    <button onclick="adicionarItem('s_8', 'Beijinho', 4.50)"
-                        class="w-full bg-primary text-white py-2 rounded-xl text-xs font-bold mt-3 shadow-md hover:bg-red-800 active:scale-95 transition-all z-10 relative">Adicionar</button>
-                </div>
-
-            </div>
-
-      
-    
-    
-</section>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function alterarQtd(id, delta) {
+            const index = carrinho.findIndex(item => item.id === id);
+            if (index !== -1) {
+                carrinho[index].quantidade += delta;
+                if (carrinho[index].quantidade <= 0) carrinho.splice(index, 1);
+                if (carrinho.length === 0) fecharModalCarrinho();
+                atualizarCarrinho();
+            }
+        }
+
+        // --- MODAIS ---
+        const modalDet = document.getElementById('detalhes-modal');
+        const modalDetContent = document.getElementById('detalhes-modal-content');
+
+        function abrirModalDetalhes(nome, preco, desc, img, id) {
+            document.getElementById('detalhes-nome').innerText = nome;
+            document.getElementById('detalhes-preco').innerText = preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            document.getElementById('detalhes-desc').innerText = desc || "Sem descrição.";
+            document.getElementById('detalhes-img').src = img;
+            document.getElementById('detalhes-btn-add').onclick = () => { adicionarItem(id, nome, preco); fecharModalDetalhes(); };
+            modalDet.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => modalDetContent.classList.remove('scale-95'), 10);
+        }
+
+        function fecharModalDetalhes() {
+            modalDetContent.classList.add('scale-95');
+            setTimeout(() => modalDet.classList.add('opacity-0', 'pointer-events-none'), 300);
+        }
+
+        function abrirModalCarrinho() {
+            document.getElementById('carrinho-modal').classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => document.getElementById('carrinho-modal-content').classList.remove('translate-y-full'), 10);
+        }
+
+        function fecharModalCarrinho() {
+            document.getElementById('carrinho-modal-content').classList.add('translate-y-full');
+            setTimeout(() => document.getElementById('carrinho-modal').classList.add('opacity-0', 'pointer-events-none'), 300);
+        }
+
+        function fecharPedido() {
+            if (carrinho.length === 0) return;
+            const btn = document.getElementById('btn-fechar-pedido');
+            btn.innerText = "LOCALIZANDO...";
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    const lat = pos.coords.latitude;
+                    const lng = pos.coords.longitude;
+                    btn.innerText = "Fechar Pedido (Usar GPS)";
+                    alert(`Pedido Fechado com Sucesso via GPS!\nLocalização: ${lat.toFixed(4)}, ${lng.toFixed(4)}`);
+                    carrinho = [];
+                    atualizarCarrinho();
+                    fecharModalCarrinho();
+                },
+                (err) => {
+                    btn.innerText = "Fechar Pedido (Usar GPS)";
+                    alert("Pedido Finalizado!");
+                    carrinho = [];
+                    atualizarCarrinho();
+                    fecharModalCarrinho();
+                }
+            );
+        }
+
+        function inicializar() {
+            const salvo = localStorage.getItem('haruy_carrinho');
+            if (salvo) { carrinho = JSON.parse(salvo); atualizarCarrinho(); }
+            carregarCategorias();
+        }
+        inicializar();
+    </script>
 
 <footer class="bg-pink-800 text-white text-center p-12 mt-[5vh]">
     <p>© 2026 Your's Docimhos - Todos os direitos reservados</p>
@@ -918,110 +608,7 @@
                 }, 300);
             }
 
-          //carrinho
-        //array para armazenar itens do carrinho
-        let carrinho = [];
-        //elementos do DOM
-        const carrinhoFooter = document.getElementById('carrinho-footer');
-        const carrinhoTotalSpan = document.getElementById ('carrinho-total');
-        //elementos do modal
-        const modal= document.getElementById('carrinho-modal');
-        const modalContent = document.getElementById('carrinho-modal-content');
-        const itensContainer = document.getElementById('carrinho-itens-container');
-        const modalTotalSpan = document.getElementById('modal-carrinho-total');
-        //verifica se o carrinho já tem itens salvos no localstorage
-        function inicializarCarrinho(){
-            const carrinhoSalvo = localStorage.getItem('haruy_carrinho');
-            if (carrinhoSalvo){
-                //se existe algo salvo converte de volta para array e atualiza o carrinho
-                carrinho = JSON.parse(carrinhoSalvo);
-                atualizarInterfaceCart();
-
-            }
-        }
-
-        //adicionar ao carrinho
-        function adicionarItem(id,nome,preco){
-            if (navigator.vibrate){
-                navigator.vibrate(200);
-            }
-            const index = carrinho.findIndex(item => item.id === id);
-
-            if (index !== -1){
-                carrinho[index].quantidade += 1;
-            }else{
-                carrinho.push({
-                    id: id,
-                    nome: nome,
-                    preco: preco,
-                    quantidade: 1
-                });
-            }
-            atualizarCarrinho();
-        }
-
-        //função modal abrir e fechar do carrinho
-        function abrirModalCarrinho (){
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            setTimeout(() => {
-                modalContent.classList.remove('translate-y-full', 'scale-95');
-            }, 10);
-        }
-        function fecharModalCarrinho(){
-            modalContent.classList.add('translate-y-full', 'scale-95');
-            setTimeout(() => {
-                modal.classList.add('opacity-0', 'pointer-events-none');
-            }, 300);
-        }
-
-        //controles dentro do modal do carrinho (aumentar, diminuir,remover itens)
-        //controle de (+ / -) quantidade
-        function aumentarQuantidade(id){
-            const index = carrinho.findIndex(item => item.id === id);
-            if (index !== -1){
-                carrinho[index].quantidade += 1;
-                atualizarCarrinho();
-                //efeito de vibração para feedback tátil
-                if (navigator.vibrate) navigator.vibrate(50);
-            }
-        }
-        
-        function diminuirQuantidade(id){
-           const index = carrinho.findIndex(item => item.id === id);
-           if (index !== -1){
-            if (carrinho[index].quantidade>1){
-                carrinho [index].quantidade -= 1;
-            }else{
-                carrinho.splice(index, 1);
-                if (carrinho.length === 0){
-                    fecharModalCarrinho();
-                }
-            }
-            atualizarCarrinho();
-            if (navigator.vibrate) navigator.vibrate(50);
-           }
-        }
-
-        //persistencia do carrinho no localstorage e atualização da interface
-        function atualizarCarrinho() {
-            localStorage.setItem('haruy_carrinho', JSON.stringify(carrinho));
-            atualizarInterfaceCart();
-        }
-        function atualizarInterfaceCart(){
-            if(carrinho.length === 0){
-                carrinhoFooter.classList.add('translate-y-full');
-                return;
-            }
-            const total = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
-            const totalFormatado = total.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
-            //Formata para a moeda Brasileira R$
-            carrinhoTotalSpan.innerText = totalFormatado;
-            modalTotalSpan.innerText = totalFormatado;
-            // Exibe a barra do carrinho (traz de volta pra tela)
-            carrinhoFooter.classList.remove('translate-y-full');
-            //Renderiza a lista de itens dentro do Modal
-            renderizarItensModal();
-        }
+       
 
        //função para renderizar os itens do carrinho dentro do modal
         function renderizarItensModal(){
