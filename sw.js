@@ -3,12 +3,12 @@ const ASSETS =[
     './',
     './index.html',
     'manifest.json',
-    './img/logo.png',
-    './img/logopwa.png',
-    './img/logopwa512.png', 
-    './img/banner.png',
-    './img/whatsapp.png',
-    './img/logo.png'
+    './assets/logo.png',
+    './assets/logopwa.png',
+    './assets/logopwa512.png', 
+    './assets/banner.png',
+    './assets/whatsapp.png',
+    './assets/logo.png'
 ];
 
 //instala o sevidor woker e coloca os arquivosno Cache
