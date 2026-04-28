@@ -1,5 +1,5 @@
 const CACHE_NAME ='haruy-cache-v8';
-const ASCETS =[
+const ASSETS =[
     './',
     './index.html',
     'manifest.json',
