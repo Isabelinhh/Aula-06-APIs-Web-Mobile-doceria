@@ -6,7 +6,6 @@ const ASSETS =[
     './assets/logo.png',
     './assets/logopwa.png',
     './assets/logopwa512.png', 
-    './assets/banner.png',
     './assets/whatsapp.png',
     './assets/logo.png'
 ];

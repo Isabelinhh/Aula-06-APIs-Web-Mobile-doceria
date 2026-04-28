@@ -8,13 +8,13 @@
 "descripition": "Cardapio digital doceria",
 "icons": [
 {
-    "src": "./assets/img/logopwa.png",
+    "src": "./assets/logopwa.png",
     "sizes": "192x192",
     "type": "image/png",
     "purpose": "any"
 },
 {
-    "src": "./assets/img/logopwa512.png",
+    "src": "./assets/logopwa512.png",
     "sizes": "512x512",
     "type": "image/png",
     "purpose": "any"
