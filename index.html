@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your's Dicinhos</title>
+
+   <!-- Configurações para PWA (manifest e tema)-->
+    <link rel='manifest' href="manifest.json">
+    <meta name="theme-color" content="##9E2256">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel='apple=touch-icon' href="./assets/img/logopwa.png">
+    <link rel='icon' type="image/png" sizes="32x32" href="./assets/img/logopwa.png">
+    <link rel='icon' type="image/png" sizes="16x16"href="./assets/img/logopwa.png">
+    <link rel='icon' type="image/png" href="./assets/img/logopwa.png">
+    <link rel='shortcut icon' href="./assets/img/logopwa.png" type="image/x-icon">
+    <meta name="msapplication-TileImage" content="./assets/img/logopwa.png">
+    <meta property="og:image" content="./assets/img/logopwa.png">
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -687,6 +700,14 @@
             }
         }
         inicializarCarrinho();
+
+        if ('serviceWorker' in nevigator) {
+            window.addEventListener('load', () => {
+                navigator.serviworker.register('./sw.js')
+                .then(reg => console.log('service worer registrado no porto!', reg))
+                .catch(err => console.error('erro ao preparer o doce:' ,err));
+            });
+        }
             
         </script>
 
