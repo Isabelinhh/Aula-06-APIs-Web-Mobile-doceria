@@ -1,6 +1,6 @@
 {
-"name": "Your´s Docinhos",
-"short_name": "Your´s",
+"name": "Yours Docinhos",
+"short_name": "Yours",
 "start_url": ".",
 "display": "standalone",
 "background_color": "#ffffff",
@@ -8,13 +8,13 @@
 "descripition": "Cardapio digital doceria",
 "icons": [
 {
-    "src": "img/logopwa.png",
+    "src": "./assets/img/logopwa.png",
     "sizes": "192x192",
     "type": "image/png",
     "purpose": "any"
 },
 {
-    "src": "img/logo512.png",
+    "src": "./assets/img/logopwa512.png",
     "sizes": "512x512",
     "type": "image/png",
     "purpose": "any"

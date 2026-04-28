@@ -1,11 +1,11 @@
-const CACHE_NAME ='haruy-cache-v8';
+const CACHE_NAME ='Yours-cache-v8';
 const ASSETS =[
     './',
     './index.html',
     'manifest.json',
     './img/logo.png',
     './img/logopwa.png',
-    './img/logo512.png', 
+    './img/logopwa512.png', 
     './img/banner.png',
     './img/whatsapp.png'
 ];
