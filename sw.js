@@ -4,7 +4,7 @@ const ASCETS =[
     './index.html',
     'manifest.json',
     './img/logo.png',
-    './img/logo2.png',
+    './img/logopwa.png',
     './img/logo512.png', 
     './img/banner.png',
     './img/whatsapp.png'
