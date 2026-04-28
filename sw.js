@@ -7,7 +7,8 @@ const ASSETS =[
     './img/logopwa.png',
     './img/logopwa512.png', 
     './img/banner.png',
-    './img/whatsapp.png'
+    './img/whatsapp.png',
+    './img/logo.png'
 ];
 
 //instala o sevidor woker e coloca os arquivosno Cache
