@@ -15,7 +15,7 @@ self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
     console.log('Doces no cache!🧁');
-        return cache.addAll(ASCETS);
+        return cache.addAll(ASSETS);
 })
 );
 });
