@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cozinha - Doceria</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-pink-50 min-h-screen font-sans">
+
+  <!-- HEADER -->
+  <header class="flex items-center justify-between p-4 bg-white shadow">
+    
+    <div class="flex items-center gap-3">
+      <!-- LOGO -->
+      <div class="w-10 h-10 rounded-xl border-2 border-pink-400 flex items-center justify-center">
+        🍰
+      </div>
+
+      <h1 class="text-xl font-bold">
+        YOUR`S <span class="text-pink-500">DOCINHOS</span>
+      </h1>
+
+      <!-- STATUS -->
+      <span id="status" class="text-sm text-red-500 font-semibold">
+        ● Offline
+      </span>
+    </div>
+
+    <!-- BOTÃO -->
+    <button onclick="carregarPedidos()" 
+      class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg shadow">
+      Atualizar
+    </button>
+  </header>
+
+  <!-- CONTEÚDO -->
+  <main class="p-6">
+
+    <!-- TÍTULO -->
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-2xl font-bold text-gray-800">
+        Pedidos Recebidos
+      </h2>
+
+      <span id="contador" 
+        class="bg-pink-200 text-pink-700 px-3 py-1 rounded-full text-sm font-semibold">
+        0 pedidos
+      </span>
+    </div>
+
+    <!-- ERRO -->
+    <div id="erro" 
+      class="bg-pink-100 border border-pink-300 text-pink-700 p-4 rounded-lg">
+      <strong>Ops!</strong><br>
+      Não foi possível carregar os pedidos da nuvem. 
+      Verifique a conexão com a API.
+    </div>
+
+    <!-- LISTA -->
+    <div id="listaPedidos" class="grid gap-4 mt-4 md:grid-cols-2 lg:grid-cols-3"></div>
+
+  </main>
+
+  <!-- SCRIPT -->
+  <script>
+    function carregarPedidos() {
+      const status = document.getElementById("status");
+      const erro = document.getElementById("erro");
+      const lista = document.getElementById("listaPedidos");
+      const contador = document.getElementById("contador");
+
+     
+      // Simular sucesso
+      erro.style.display = "none";
+      status.textContent = "● Online";
+      status.className = "text-sm text-green-500 font-semibold";
+
+      lista.innerHTML = "";
+
+      pedidos.forEach(p => {
+        let card = document.createElement("div");
+        card.className = "bg-white p-4 rounded-xl shadow border-l-4 border-pink-400";
+
+        card.innerHTML = `
+          <h3 class="font-bold text-lg">Pedido #${p.id}</h3>
+          <p class="text-gray-600">Cliente: ${p.cliente}</p>
+
+          <ul class="text-sm my-2">
+            ${p.itens.map(i => `<li>${i}</li>`).join("")}
+          </ul>
+
+          <span class="bg-pink-100 text-pink-600 px-2 py-1 rounded text-xs">
+            Novo
+          </span>
+        `;
+
+        lista.appendChild(card);
+      });
+
+      contador.textContent = pedidos.length + " pedidos";
+    }
+  </script>
+
+</body>
+</html>
