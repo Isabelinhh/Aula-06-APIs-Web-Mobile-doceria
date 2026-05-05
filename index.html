@@ -625,6 +625,7 @@
 
        //função para renderizar os itens do carrinho dentro do modal
         function renderizarItensModal(){
+            const itensContainer = document.getElementById('carrinho-itens-container');
             if (!itensContainer) return;
             itensContainer.innerHTML = '';
             // para cada item no array, cria um HTML
