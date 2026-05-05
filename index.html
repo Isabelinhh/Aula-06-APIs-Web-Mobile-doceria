@@ -10,7 +10,7 @@
     <meta name="theme-color" content="#9E2256">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel='apple=touch-icon' href="./assets/logopwa.png">
+    <link rel='apple-touch-icon' href="./assets/logopwa.png">
     <link rel='icon' type="assets/png" sizes="32x32" href="./assets/logopwa.png">
     <link rel='icon' type="assets/png" sizes="16x16"href="./assets/logopwa.png">
     <link rel='icon' type="assets/png" href="./assets/logopwa.png">
@@ -34,7 +34,7 @@
                         primary: '#ca3c3f',
                         dark: '#222222',
                         muted: '#999999',
-                        footer: '333333',
+                        footer: '#333333',
                     }
                 }
             }
@@ -58,7 +58,7 @@
                         </a>
                     </div>
                     <div class="hidden md:flex items-center space-x-1">
-                        <a href="#home" class="py-4 px-2 text-pink-500border-b-4 border-pink-500 font-semibold">HOME</a>
+                        <a href="#home" class="py-4 px-2 text-pink-500 border-b-4 border-pink-500 font-semibold">HOME</a>
                         <a href="#cardapio" class="py-4 px-2 text-gray-500 font-semibold hover:text-pink-400 transition duration-300">Cardápio</a>
                     </div>
                 </div>
@@ -675,7 +675,7 @@
                         btnPedido.innerText = btnOriginalText;
 
                         alert(`Pedido Fechado com Sucesso! 
-                        \nSua Localização: ${lat.toFixed(4)}, ${lmg.toFixed(4)}
+                        \nSua Localização: ${lat.toFixed(4)}, ${lng.toFixed(4)}
                         \nOs dados do carrinho serão limpos`);
 
                         carrinho = [];
@@ -703,7 +703,7 @@
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviworker.register('./sw.js')
+                navigator.serviceWorker.register('./sw.js')
                 .then(reg => console.log('service worer registrado no porto!', reg))
                 .catch(err => console.error('erro ao preparer o doce:' ,err));
             });
