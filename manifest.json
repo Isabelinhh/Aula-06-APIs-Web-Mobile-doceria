@@ -4,8 +4,8 @@
 "start_url": ".",
 "display": "standalone",
 "background_color": "#ffffff",
-"theme_color": "##9E2256",
-"descripition": "Cardapio digital doceria",
+"theme_color": "#9E2256",
+"description": "Cardapio digital doceria",
 "icons": [
 {
     "src": "./assets/logopwa.png",
