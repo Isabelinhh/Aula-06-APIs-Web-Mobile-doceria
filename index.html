@@ -304,7 +304,7 @@
             document.getElementById('carrinho-total').innerText = formatado;
             document.getElementById('modal-carrinho-total').innerText = formatado;
 
-            if (carrinho.length > 0) document.getElementById('carrinho-footer').classList.remove('translate-y-full');
+            if (carrinho.length === 0) document.getElementById('carrinho-footer').classList.remove('translate-y-full');
             else document.getElementById('carrinho-footer').classList.add('translate-y-full');
 
             renderizarItensModal();
