@@ -262,7 +262,7 @@
             }
             produtos.forEach(p => {
                 const precoFormatado = p.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-                const imgSource = (p.imagem && p.imagem.startsWith('http')) ? p.imagem : `./assets/img/${p.imagem || 'logo.png'}`;
+                const imgSource = (p.imagem && p.imagem.startsWith('http')) ? p.imagem : `./assets/${p.imagem || 'logo.png'}`;
 
                 // Sanitização da descrição
                 const descSanitizada = (p.descricao || '').replace(/'/g, "\\'").replace(/\n/g, " ");
