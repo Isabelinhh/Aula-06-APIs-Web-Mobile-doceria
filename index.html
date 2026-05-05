@@ -311,7 +311,7 @@
         }
 
         function renderizarItensModal() {
-            const container = document.getElementById('carrinho-itens-container');
+           const itensContainer = document.getElementById('carrinho-itens-container');
             if (!container) return;
             container.innerHTML = '';
             carrinho.forEach(item => {
@@ -659,7 +659,7 @@
 
         //fechar pedido (Geolocalização API - GPS)
         function fecharPedido(){
-            if (carrinho.length === 0){
+            if (carrinho.length > 0){
                 const btnPedido = document.getElementById('btn-fechar-pedido');
                 if (!btnPedido) return;
 
