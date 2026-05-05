@@ -297,7 +297,7 @@
         }
 
         function atualizarCarrinho() {
-            localStorage.setItem('haruy_carrinho', JSON.stringify(carrinho));
+            localStorage.setItem('doceria_carrinho', JSON.stringify(carrinho));
             const total = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
             const formatado = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
@@ -397,7 +397,7 @@
         }
 
         function inicializar() {
-            const salvo = localStorage.getItem('haruy_carrinho');
+            const salvo = localStorage.getItem('doceria_carrinho');
             if (salvo) { carrinho = JSON.parse(salvo); atualizarCarrinho(); }
             carregarCategorias();
         }
