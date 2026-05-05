@@ -701,7 +701,7 @@
         }
         inicializarCarrinho();
 
-        if ('serviceWorker' in nevigator) {
+        if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviworker.register('./sw.js')
                 .then(reg => console.log('service worer registrado no porto!', reg))
