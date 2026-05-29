@@ -273,7 +273,9 @@
         async function selecionarCategoria(id, nome) {
             categoriaTitulo.innerText = nome;
             document.querySelectorAll('.btn-cat').forEach(btn => {
-                if (parseInt(btn.dataset.id) === id) {
+                const btnId = btn.dataset.id;
+                const isMatch = isNaN(btnId) || isNaN(id) ? btnId == id : parseInt(btnId) === parseInt(id);
+                if (isMatch) {
                     btn.classList.add('bg-primary', 'text-white', 'shadow-md');
                     btn.classList.remove('bg-gray-200', 'text-dark');
                 } else {
